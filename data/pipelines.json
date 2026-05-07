@@ -1,0 +1,125 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "enbridge-mainline",
+        "name": "Enbridge Mainline",
+        "operator": "Enbridge Inc.",
+        "status": "Operational",
+        "commodity": "Crude oil — light, heavy, and diluted bitumen (WCS, synthetic crude)",
+        "from": { "name": "Edmonton", "province": "AB" },
+        "to": { "name": "Superior, WI / Sarnia, ON / US Gulf Coast", "country": "US" },
+        "lengthKm": 13700,
+        "capacityBpd": 3000000,
+        "inServiceYear": 1950,
+        "keyFacts": [
+          "The largest crude oil transportation system in North America by capacity.",
+          "Multiple parallel lines (1, 2, 3, 4, 5, 6A, 6B, 9, 10) carry different grades to refineries in the US Midwest, eastern Canada, and the Gulf Coast.",
+          "Line 5 crosses the Straits of Mackinac in Michigan — politically contested for decades over environmental risk.",
+          "Line 3 was replaced in 2019–2021 — Enbridge's largest project ever (~$10B CAD).",
+          "Originally built in 1950 as the Interprovincial Pipe Line; rebranded as Enbridge in 1998."
+        ],
+        "notes": "On the map: only the western Canadian trunk (Edmonton → Hardisty → through the prairies to the Manitoba / US border) is rendered. The system continues into the US Lakehead network, then re-enters Canada at Sarnia, ON.",
+        "color": "#d97706"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-113.49, 53.55],
+          [-112.40, 53.10],
+          [-111.34, 52.69],
+          [-109.50, 52.10],
+          [-107.50, 51.40],
+          [-105.50, 50.80],
+          [-104.62, 50.45],
+          [-103.00, 50.10],
+          [-101.20, 49.78],
+          [-99.40, 49.40],
+          [-97.56, 49.00]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "trans-mountain",
+        "name": "Trans Mountain Pipeline System",
+        "operator": "Trans Mountain Corporation (Government of Canada)",
+        "status": "Operational",
+        "commodity": "Crude oil — light crude and diluted bitumen; some refined products",
+        "from": { "name": "Edmonton", "province": "AB" },
+        "to": { "name": "Burnaby (Westridge Marine Terminal)", "province": "BC" },
+        "lengthKm": 1150,
+        "capacityBpd": 890000,
+        "inServiceYear": 1953,
+        "keyFacts": [
+          "The only Canadian pipeline carrying crude to a Pacific tidewater port — strategic Asian-market access.",
+          "TMX (Trans Mountain Expansion) entered service in June 2024, lifting capacity from ~300,000 to 890,000 bbl/day.",
+          "Owned by the Government of Canada since 2018, after Kinder Morgan exited amid permitting risk.",
+          "Crosses the Rockies via the Yellowhead corridor (Edmonton → Jasper → Kamloops → Hope → Burnaby).",
+          "TMX commissioning has narrowed the WCS / WTI price differential as Canadian crude reaches new buyers."
+        ],
+        "notes": "The original Trans Mountain Pipeline (TMP) entered service in 1953. The expansion (TMX) twins most of the corridor and tripled effective egress capacity in 2024.",
+        "color": "#e11d48"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-113.49, 53.55],
+          [-115.50, 53.50],
+          [-117.55, 53.40],
+          [-118.08, 52.87],
+          [-119.13, 52.95],
+          [-119.50, 52.20],
+          [-120.00, 51.40],
+          [-120.34, 50.66],
+          [-121.10, 49.80],
+          [-121.44, 49.38],
+          [-122.30, 49.30],
+          [-122.96, 49.27]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "keystone",
+        "name": "Keystone Pipeline (Phases 1–2)",
+        "operator": "South Bow (formerly TC Energy)",
+        "status": "Operational",
+        "commodity": "Crude oil — primarily diluted bitumen (WCS) and light synthetic crude",
+        "from": { "name": "Hardisty", "province": "AB" },
+        "to": { "name": "Cushing, OK / Texas Gulf refineries", "country": "US" },
+        "lengthKm": 4327,
+        "capacityBpd": 590000,
+        "inServiceYear": 2010,
+        "keyFacts": [
+          "Connects Alberta's oil sands to US refining hubs at Cushing, OK ('the pipeline crossroads of the world') and the Texas Gulf Coast.",
+          "Border crossing at Haskett, MB / Walhalla, ND.",
+          "Distinct from the cancelled Keystone XL (2021) — the proposed shorter, larger-diameter extension across Montana and South Dakota.",
+          "TC Energy spun off its liquids business as 'South Bow' in October 2024 — Keystone is now a South Bow asset.",
+          "A December 2022 spill in Kansas (~14,000 bbl) led to capacity restrictions while remediation was underway."
+        ],
+        "notes": "On the map: only the Canadian segment (Hardisty, AB → border crossing at Haskett, MB) is rendered. The system continues through North Dakota, South Dakota, Nebraska, then south to Cushing, OK and the Texas Gulf Coast.",
+        "color": "#7c3aed"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-111.34, 52.69],
+          [-110.00, 52.10],
+          [-109.13, 51.92],
+          [-107.50, 51.20],
+          [-105.50, 50.50],
+          [-104.62, 50.45],
+          [-103.00, 50.10],
+          [-101.20, 49.78],
+          [-99.50, 49.40],
+          [-97.85, 49.00]
+        ]
+      }
+    }
+  ]
+}
