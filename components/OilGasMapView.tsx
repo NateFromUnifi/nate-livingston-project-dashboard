@@ -19,10 +19,7 @@ type CategoryConfig = {
 
 export default function OilGasMapView() {
   const [selectedPipelineId, setSelectedPipelineId] = useState<string | null>(null);
-  const [enabled, setEnabled] = useState<Record<PipelineCategory, boolean>>({
-    crude: true,
-    gas: true,
-  });
+  const [activeCategory, setActiveCategory] = useState<PipelineCategory | null>('crude');
 
   const categories = useMemo<CategoryConfig[]>(
     () => [
@@ -32,30 +29,20 @@ export default function OilGasMapView() {
     [],
   );
 
-  const anyEnabled = enabled.crude || enabled.gas;
-
   const toggleCategory = (key: PipelineCategory) => {
-    setEnabled((prev) => {
-      const next = { ...prev, [key]: !prev[key] };
-      // Clear selection if the selected pipeline's category was just turned off
-      if (!next[key] && selectedPipelineId) {
-        const sel = categories.find((c) => c.key === key)?.features.find(
-          (f) => f.properties.id === selectedPipelineId,
-        );
-        if (sel) setSelectedPipelineId(null);
-      }
-      return next;
-    });
+    const next = activeCategory === key ? null : key;
+    setActiveCategory(next);
+    setSelectedPipelineId(null);
   };
 
   return (
     <>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Pipeline category">
           {categories.map((c) => (
             <LayerToggle
               key={c.key}
-              enabled={enabled[c.key]}
+              enabled={activeCategory === c.key}
               onToggle={() => toggleCategory(c.key)}
               label={c.label}
               count={c.features.length}
@@ -64,22 +51,18 @@ export default function OilGasMapView() {
           ))}
         </div>
         <span className="text-xs uppercase tracking-wider text-neutral-400">
-          {anyEnabled ? 'Click a pipeline for details' : 'Hover a region'}
+          {activeCategory ? 'Click a pipeline for details' : 'Hover a region'}
         </span>
       </div>
 
       <div className="text-neutral-700 dark:text-neutral-300">
         <CanadaMap>
-          {categories.map(
-            (c) =>
-              enabled[c.key] && (
-                <PipelineLayer
-                  key={c.key}
-                  category={c.key}
-                  selectedId={selectedPipelineId}
-                  onSelect={setSelectedPipelineId}
-                />
-              ),
+          {activeCategory && (
+            <PipelineLayer
+              category={activeCategory}
+              selectedId={selectedPipelineId}
+              onSelect={setSelectedPipelineId}
+            />
           )}
         </CanadaMap>
       </div>
