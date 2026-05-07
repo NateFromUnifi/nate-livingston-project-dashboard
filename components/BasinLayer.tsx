@@ -1,7 +1,6 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import { geoCentroid } from 'd3-geo';
 import { useCanadaProjection } from '@/components/CanadaMap';
 import { basins } from '@/lib/basins';
 
@@ -10,31 +9,87 @@ type Props = {
   onSelect: (id: string) => void;
 };
 
-const MIN_RADIUS = 16;
-const MAX_RADIUS = 70;
+type Pt = [number, number];
+
+// Inflate the polygon outward this much before smoothing, so the
+// rounded blob encapsulates the polygon's interior area instead of
+// inset-ing into it (which midpoint smoothing alone would do).
+const INFLATE_FACTOR = 1.12;
+
+function centroid(points: Pt[]): Pt {
+  const n = points.length;
+  return [
+    points.reduce((s, p) => s + p[0], 0) / n,
+    points.reduce((s, p) => s + p[1], 0) / n,
+  ];
+}
+
+function scaleAround(points: Pt[], cx: number, cy: number, factor: number): Pt[] {
+  return points.map((p) => [cx + (p[0] - cx) * factor, cy + (p[1] - cy) * factor]);
+}
+
+function polygonArea(points: Pt[]): number {
+  let a = 0;
+  const n = points.length;
+  for (let i = 0; i < n; i++) {
+    const j = (i + 1) % n;
+    a += points[i][0] * points[j][1];
+    a -= points[j][0] * points[i][1];
+  }
+  return Math.abs(a / 2);
+}
+
+// Closed quadratic-bezier smoothing: each polygon vertex becomes a
+// control point and the curve passes through every edge midpoint.
+// Result is a closed rounded blob with no sharp corners.
+function smoothClosedPath(points: Pt[]): string {
+  const n = points.length;
+  if (n < 3) return '';
+  const mid = (a: Pt, b: Pt): Pt => [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+  const start = mid(points[n - 1], points[0]);
+  let d = `M ${start[0].toFixed(2)} ${start[1].toFixed(2)}`;
+  for (let i = 0; i < n; i++) {
+    const v = points[i];
+    const next = mid(points[i], points[(i + 1) % n]);
+    d += ` Q ${v[0].toFixed(2)} ${v[1].toFixed(2)} ${next[0].toFixed(2)} ${next[1].toFixed(2)}`;
+  }
+  return d + ' Z';
+}
 
 export default function BasinLayer({ selectedId, onSelect }: Props) {
-  const { projection, pathFn } = useCanadaProjection();
+  const { projection } = useCanadaProjection();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const items = useMemo(() => {
     const built = basins.features.map((f) => {
-      const centroid = geoCentroid(f);
-      const projected = projection(centroid) ?? [0, 0];
-      const areaPx2 = pathFn.area(f);
-      const radiusPx = Math.max(MIN_RADIUS, Math.min(MAX_RADIUS, Math.sqrt(areaPx2 / Math.PI)));
+      const ring = (f.geometry.type === 'Polygon'
+        ? f.geometry.coordinates[0]
+        : f.geometry.coordinates[0][0]) as Pt[];
+      // Drop GeoJSON's duplicate closing point if present.
+      const isDupClose =
+        ring.length > 1 &&
+        ring[0][0] === ring[ring.length - 1][0] &&
+        ring[0][1] === ring[ring.length - 1][1];
+      const open = isDupClose ? ring.slice(0, -1) : ring;
+      const projected = open.map((c) => (projection(c) ?? [0, 0]) as Pt);
+      const [cx, cy] = centroid(projected);
+      const inflated = scaleAround(projected, cx, cy, INFLATE_FACTOR);
+      const xs = inflated.map((p) => p[0]);
+      const ys = inflated.map((p) => p[1]);
       return {
         id: f.properties.id,
         name: f.properties.name,
         color: f.properties.color,
-        cx: projected[0],
-        cy: projected[1],
-        r: radiusPx,
+        d: smoothClosedPath(inflated),
+        labelX: (Math.min(...xs) + Math.max(...xs)) / 2,
+        labelY: Math.min(...ys) - 12,
+        area: polygonArea(inflated),
       };
     });
-    // Render largest first so smaller circles sit on top and stay clickable.
-    return built.sort((a, b) => b.r - a.r);
-  }, [projection, pathFn]);
+    // Render largest first; smaller shapes sit on top so they remain
+    // clickable in any overlap zone.
+    return built.sort((a, b) => b.area - a.area);
+  }, [projection]);
 
   const hasSelection = selectedId !== null;
   const hovered = items.find((i) => i.id === hoveredId);
@@ -67,48 +122,34 @@ export default function BasinLayer({ selectedId, onSelect }: Props) {
           : 0.75;
 
         return (
-          <g key={b.id}>
-            {/* Slightly-larger transparent ring widens the hit target. */}
-            <circle
-              cx={b.cx}
-              cy={b.cy}
-              r={b.r + 6}
-              fill="transparent"
-              stroke="transparent"
-              className="cursor-pointer"
-              pointerEvents="all"
-              onMouseEnter={() => setHoveredId(b.id)}
-              onMouseLeave={() => setHoveredId((id) => (id === b.id ? null : id))}
-              onClick={(e) => {
-                e.stopPropagation();
-                onSelect(b.id);
-              }}
-            />
-            <circle
-              cx={b.cx}
-              cy={b.cy}
-              r={b.r}
-              fill={b.color}
-              fillOpacity={fillOpacity}
-              stroke={b.color}
-              strokeWidth={strokeWidth}
-              strokeOpacity={strokeOpacity}
-              className="transition-all duration-150"
-              pointerEvents="none"
-            >
-              <title>{b.name}</title>
-            </circle>
-          </g>
+          <path
+            key={b.id}
+            d={b.d}
+            fill={b.color}
+            fillOpacity={fillOpacity}
+            stroke={b.color}
+            strokeWidth={strokeWidth}
+            strokeOpacity={strokeOpacity}
+            strokeLinejoin="round"
+            className="cursor-pointer transition-all duration-150"
+            onMouseEnter={() => setHoveredId(b.id)}
+            onMouseLeave={() => setHoveredId((id) => (id === b.id ? null : id))}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSelect(b.id);
+            }}
+          >
+            <title>{b.name}</title>
+          </path>
         );
       })}
 
-      {hovered && <BasinLabel x={hovered.cx} y={hovered.cy - hovered.r - 12} name={hovered.name} />}
+      {hovered && <BasinLabel x={hovered.labelX} y={hovered.labelY} name={hovered.name} />}
     </g>
   );
 }
 
 function BasinLabel({ x, y, name }: { x: number; y: number; name: string }) {
-  // Approximate width based on character count — close enough for our 5 basin names.
   const width = name.length * 6.6 + 14;
   const safeY = y < 18 ? y + 28 : y;
   return (
@@ -122,14 +163,7 @@ function BasinLabel({ x, y, name }: { x: number; y: number; name: string }) {
         fill="#171717"
         fillOpacity={0.9}
       />
-      <text
-        x={0}
-        y={4}
-        textAnchor="middle"
-        fontSize={11}
-        fontWeight={600}
-        fill="white"
-      >
+      <text x={0} y={4} textAnchor="middle" fontSize={11} fontWeight={600} fill="white">
         {name}
       </text>
     </g>
