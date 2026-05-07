@@ -1,0 +1,172 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "athabasca-oil-sands",
+        "name": "Athabasca Oil Sands",
+        "resourceType": "oil-sands",
+        "primaryResource": "Heavy crude (bitumen) — mining + SAGD",
+        "province": "AB",
+        "productionContext": "~3.0+ million bbl/d of bitumen — the single largest producing region in Canada",
+        "reserves": "~165 billion bbl recoverable bitumen (third-largest oil reserves on Earth, after Venezuela and Saudi Arabia)",
+        "majorOperators": ["Suncor", "Canadian Natural Resources (CNRL)", "Imperial Oil", "Cenovus Energy", "MEG Energy"],
+        "geology": "Cretaceous-age McMurray Formation sands saturated with bitumen. Depths range from surface outcrop (mineable) to ~500m (in-situ).",
+        "keyFacts": [
+          "Produces over half of Canada's total crude oil output.",
+          "Bitumen is too thick to flow naturally — recovered via either open-pit mining (~20% of production) or SAGD / steam-assisted gravity drainage (~80%).",
+          "Fort McMurray is the operational hub; the city's population swings ~10–20% with construction-phase activity cycles.",
+          "Carbon intensity per barrel is higher than most conventional crude — central tension in Canadian energy/climate policy.",
+          "Pathways Alliance (Suncor + CNRL + Cenovus + others) is proposing a multi-billion-dollar CCUS network; FID still pending as of 2026."
+        ],
+        "notes": "Polygon is a simplified outline of the producing region around Fort McMurray. Actual deposit boundaries are larger and irregular.",
+        "color": "#92400e"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-114.0, 57.8],
+          [-110.0, 58.5],
+          [-108.5, 57.5],
+          [-108.5, 56.0],
+          [-110.5, 55.0],
+          [-113.0, 55.3],
+          [-114.0, 57.8]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cold-lake-oil-sands",
+        "name": "Cold Lake Oil Sands",
+        "resourceType": "oil-sands",
+        "primaryResource": "Heavy crude (bitumen) — mostly SAGD / CSS",
+        "province": "AB",
+        "productionContext": "~400–500 thousand bbl/d of bitumen",
+        "reserves": "~200 billion bbl bitumen in place (recoverable subset is smaller)",
+        "majorOperators": ["Imperial Oil (Esso)", "Canadian Natural Resources (CNRL)"],
+        "geology": "Cretaceous Clearwater Formation; deposits sit deeper than Athabasca — economically recoverable only via in-situ thermal methods (CSS — cyclic steam stimulation, and SAGD).",
+        "keyFacts": [
+          "The second-largest oil sands deposit by production — but with deposits too deep to mine, all production is in-situ.",
+          "Imperial Oil's Cold Lake project is the country's largest single thermal in-situ operation.",
+          "CSS (cyclic steam stimulation) was pioneered here — inject steam, soak, then produce on huff-and-puff cycles.",
+          "Lower carbon intensity than mining but higher than Montney / Duvernay gas/liquids production.",
+          "Connected to the Enbridge Mainline + Trans Mountain via gathering systems through Edmonton."
+        ],
+        "color": "#c2410c"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-111.5, 55.5],
+          [-109.5, 55.5],
+          [-109.0, 54.0],
+          [-111.0, 54.0],
+          [-111.5, 55.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "peace-river-oil-sands",
+        "name": "Peace River Oil Sands",
+        "resourceType": "oil-sands",
+        "primaryResource": "Heavy crude (bitumen) — SAGD",
+        "province": "AB",
+        "productionContext": "~80–100 thousand bbl/d of bitumen",
+        "reserves": "~24 billion bbl bitumen in place",
+        "majorOperators": ["Canadian Natural Resources (CNRL)", "Shell Canada"],
+        "geology": "Cretaceous Bluesky-Gething Formation, deeper than Athabasca and lower-permeability than Cold Lake.",
+        "keyFacts": [
+          "The smallest and northwestern-most of Canada's three oil sands deposits.",
+          "Lower production rate than Athabasca and Cold Lake — geology is less favourable, with less continuous reservoir.",
+          "All current production is in-situ (SAGD) — no surface mining viable here.",
+          "Often gets less media attention but completes the 'three oil sands deposits' story (Athabasca + Cold Lake + Peace River).",
+          "Pipeline access via TransCanada Northwest connector → Edmonton hub."
+        ],
+        "color": "#f59e0b"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-119.0, 57.5],
+          [-115.5, 57.5],
+          [-115.0, 55.5],
+          [-118.5, 55.5],
+          [-119.0, 57.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "montney",
+        "name": "Montney",
+        "resourceType": "liquids-rich-shale",
+        "primaryResource": "Natural gas + NGLs / condensate (the marquee gas + liquids play)",
+        "province": "BC / AB",
+        "productionContext": "~12 Bcf/d of gas + ~700 thousand bbl/d of condensate and NGLs (Canada's most prolific producer)",
+        "reserves": "~500+ Tcf marketable gas resource (resource estimates have grown materially over the past decade as drilling tested deeper / wider)",
+        "majorOperators": ["ARC Resources", "Tourmaline Oil", "Ovintiv", "Canadian Natural Resources", "Crew Energy", "Petronas (Pacific NorthWest)"],
+        "geology": "Triassic Montney Formation — siltstone reservoir with two distinct pay zones (Upper and Lower). Spans NE BC across the AB border.",
+        "keyFacts": [
+          "Canada's most prolific gas play — supplies Coastal GasLink (LNG Canada) and most prairie-export gas pipelines.",
+          "Liquids-rich (condensate + NGLs) — operators chase the 'liquids window' for higher netbacks vs dry-gas-only zones.",
+          "The condensate stream is critical: it's blended with bitumen to produce 'dilbit' (diluted bitumen) for pipeline transport from the oil sands.",
+          "Montney rivals US shale plays for resource size — debated as one of the largest natural gas reservoirs globally.",
+          "Tourmaline Oil is the largest single producer (relevant for the upcoming Tourmaline DCF on this dashboard)."
+        ],
+        "notes": "Polygon spans the BC / AB border around Dawson Creek, Fort St. John, and Grande Prairie. The Montney is geologically more extensive than the rendered outline.",
+        "color": "#0e7490"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-122.5, 56.5],
+          [-122.5, 54.5],
+          [-118.5, 54.0],
+          [-117.0, 54.5],
+          [-117.5, 57.0],
+          [-122.0, 57.0],
+          [-122.5, 56.5]
+        ]]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "duvernay",
+        "name": "Duvernay",
+        "resourceType": "liquids-rich-shale",
+        "primaryResource": "Light oil + condensate + natural gas (very NGL-rich)",
+        "province": "AB",
+        "productionContext": "~250–300 thousand boe/d, weighted toward liquids and condensate",
+        "reserves": "~100+ Tcf gas resource and billions of bbl of recoverable liquids",
+        "majorOperators": ["Chevron Canada", "ConocoPhillips", "Crescent Point Energy", "Tourmaline Oil", "Vermilion Energy"],
+        "geology": "Upper Devonian Duvernay Formation — organic-rich shale that sources hydrocarbons trapped in adjacent rock. Recovered via horizontal drilling + multi-stage hydraulic fracturing.",
+        "keyFacts": [
+          "Canada's premier liquids-rich shale — biggest source of domestic condensate, which is essential for pipeline-shipping bitumen as 'dilbit'.",
+          "Operators target the 'volatile oil window' where liquids yields are highest.",
+          "Located beneath the Deep Basin — both plays often produced from the same well pads.",
+          "Younger commercially than the Montney — most production has come online in the past decade.",
+          "Often described as Alberta's analogue to the US Eagle Ford (south Texas) or Bakken — but with deeper carbonates above and below."
+        ],
+        "notes": "Polygon is centred over the Drayton Valley / Edson / Fox Creek corridor. The Duvernay is geologically more extensive than the rendered outline, and underlies parts of the Montney territory at greater depth.",
+        "color": "#4338ca"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-117.0, 53.8],
+          [-114.5, 53.8],
+          [-114.0, 52.0],
+          [-116.5, 52.0],
+          [-117.0, 53.8]
+        ]]
+      }
+    }
+  ]
+}

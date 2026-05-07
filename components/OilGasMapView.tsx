@@ -4,12 +4,15 @@ import { useMemo, useState } from 'react';
 import CanadaMap from '@/components/CanadaMap';
 import PipelineLayer from '@/components/PipelineLayer';
 import PipelineCard from '@/components/PipelineCard';
+import BasinLayer from '@/components/BasinLayer';
+import BasinCard from '@/components/BasinCard';
 import LayerToggle from '@/components/LayerToggle';
 import {
   getPipelinesByCategory,
   PIPELINE_CATEGORY_LABELS,
   type PipelineCategory,
 } from '@/lib/pipelines';
+import { basins, BASIN_LAYER_LABEL } from '@/lib/basins';
 
 type CategoryConfig = {
   key: PipelineCategory;
@@ -17,9 +20,17 @@ type CategoryConfig = {
   features: ReturnType<typeof getPipelinesByCategory>;
 };
 
+type Selection =
+  | { kind: 'pipeline'; id: string }
+  | { kind: 'basin'; id: string }
+  | null;
+
+const basinSwatchColors = basins.features.map((f) => f.properties.color);
+
 export default function OilGasMapView() {
-  const [selectedPipelineId, setSelectedPipelineId] = useState<string | null>(null);
+  const [selection, setSelection] = useState<Selection>(null);
   const [activeCategory, setActiveCategory] = useState<PipelineCategory | null>('crude');
+  const [basinsEnabled, setBasinsEnabled] = useState(true);
 
   const categories = useMemo<CategoryConfig[]>(
     () => [
@@ -29,48 +40,80 @@ export default function OilGasMapView() {
     [],
   );
 
-  const toggleCategory = (key: PipelineCategory) => {
+  const togglePipelineCategory = (key: PipelineCategory) => {
     const next = activeCategory === key ? null : key;
     setActiveCategory(next);
-    setSelectedPipelineId(null);
+    if (selection?.kind === 'pipeline') setSelection(null);
   };
+
+  const toggleBasins = () => {
+    setBasinsEnabled((prev) => !prev);
+    if (basinsEnabled && selection?.kind === 'basin') setSelection(null);
+  };
+
+  const selectedPipelineId = selection?.kind === 'pipeline' ? selection.id : null;
+  const selectedBasinId = selection?.kind === 'basin' ? selection.id : null;
+
+  const hint = (() => {
+    if (activeCategory && basinsEnabled) return 'Click a pipeline or basin for details';
+    if (activeCategory) return 'Click a pipeline for details';
+    if (basinsEnabled) return 'Click a basin for details';
+    return 'Hover a region';
+  })();
 
   return (
     <>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-2" role="radiogroup" aria-label="Pipeline category">
-          {categories.map((c) => (
-            <LayerToggle
-              key={c.key}
-              enabled={activeCategory === c.key}
-              onToggle={() => toggleCategory(c.key)}
-              label={c.label}
-              count={c.features.length}
-              swatchColors={c.features.map((f) => f.properties.color)}
-            />
-          ))}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+          <span className="text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+            Pipelines
+          </span>
+          <div role="radiogroup" aria-label="Pipeline category" className="flex flex-wrap gap-2">
+            {categories.map((c) => (
+              <LayerToggle
+                key={c.key}
+                enabled={activeCategory === c.key}
+                onToggle={() => togglePipelineCategory(c.key)}
+                label={c.label}
+                count={c.features.length}
+                swatchColors={c.features.map((f) => f.properties.color)}
+              />
+            ))}
+          </div>
+          <span className="ml-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+            Geology
+          </span>
+          <LayerToggle
+            enabled={basinsEnabled}
+            onToggle={toggleBasins}
+            label={BASIN_LAYER_LABEL}
+            count={basins.features.length}
+            swatchColors={basinSwatchColors}
+          />
         </div>
-        <span className="text-xs uppercase tracking-wider text-neutral-400">
-          {activeCategory ? 'Click a pipeline for details' : 'Hover a region'}
-        </span>
+        <span className="text-xs uppercase tracking-wider text-neutral-400">{hint}</span>
       </div>
 
       <div className="text-neutral-700 dark:text-neutral-300">
         <CanadaMap>
+          {basinsEnabled && (
+            <BasinLayer
+              selectedId={selectedBasinId}
+              onSelect={(id) => setSelection({ kind: 'basin', id })}
+            />
+          )}
           {activeCategory && (
             <PipelineLayer
               category={activeCategory}
               selectedId={selectedPipelineId}
-              onSelect={setSelectedPipelineId}
+              onSelect={(id) => setSelection({ kind: 'pipeline', id })}
             />
           )}
         </CanadaMap>
       </div>
 
-      <PipelineCard
-        selectedId={selectedPipelineId}
-        onClose={() => setSelectedPipelineId(null)}
-      />
+      <PipelineCard selectedId={selectedPipelineId} onClose={() => setSelection(null)} />
+      <BasinCard selectedId={selectedBasinId} onClose={() => setSelection(null)} />
     </>
   );
 }
