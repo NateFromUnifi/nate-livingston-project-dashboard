@@ -2,7 +2,7 @@
 
 Public hub for finance, energy, and equity research projects.
 
-Live: _deploying…_
+Live: <https://nate-livingston-project-dashboard.vercel.app>
 
 ## Stack
 
