@@ -90,7 +90,7 @@ export default function PipelineCard({ selectedId, onClose }: Props) {
             <Field label="Commodity">{displayed.commodity}</Field>
             <div className="grid grid-cols-3 gap-4">
               <Field label="Length">{formatNumber(displayed.lengthKm)} km</Field>
-              <Field label="Capacity">{formatNumber(displayed.capacityBpd)} bbl/d</Field>
+              <Field label="Capacity">{displayed.capacity}</Field>
               <Field label="In service">{displayed.inServiceYear}</Field>
             </div>
 

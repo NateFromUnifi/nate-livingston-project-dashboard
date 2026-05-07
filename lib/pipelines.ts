@@ -1,5 +1,7 @@
-import type { Feature, FeatureCollection, LineString } from 'geojson';
+import type { Feature, FeatureCollection, LineString, MultiLineString } from 'geojson';
 import data from '@/data/pipelines.json';
+
+export type PipelineCategory = 'crude' | 'gas';
 
 export type PipelineEndpoint = {
   name: string;
@@ -10,21 +12,23 @@ export type PipelineEndpoint = {
 export type PipelineProperties = {
   id: string;
   name: string;
+  category: PipelineCategory;
   operator: string;
   status: 'Operational' | 'Cancelled' | 'Proposed';
   commodity: string;
   from: PipelineEndpoint;
   to: PipelineEndpoint;
   lengthKm: number;
-  capacityBpd: number;
+  capacity: string;
   inServiceYear: number;
   keyFacts: string[];
   notes?: string;
   color: string;
 };
 
-export type PipelineFeature = Feature<LineString, PipelineProperties>;
-export type PipelineCollection = FeatureCollection<LineString, PipelineProperties>;
+export type PipelineGeometry = LineString | MultiLineString;
+export type PipelineFeature = Feature<PipelineGeometry, PipelineProperties>;
+export type PipelineCollection = FeatureCollection<PipelineGeometry, PipelineProperties>;
 
 export const pipelines = data as unknown as PipelineCollection;
 
@@ -33,4 +37,11 @@ export function getPipelineById(id: string): PipelineProperties | null {
   return f ? f.properties : null;
 }
 
-export const PIPELINE_LAYER_LABEL = 'Crude Oil Pipelines';
+export function getPipelinesByCategory(category: PipelineCategory): PipelineFeature[] {
+  return pipelines.features.filter((f) => f.properties.category === category);
+}
+
+export const PIPELINE_CATEGORY_LABELS: Record<PipelineCategory, string> = {
+  crude: 'Crude Oil Pipelines',
+  gas: 'Natural Gas Pipelines',
+};

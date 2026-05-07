@@ -1,47 +1,85 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import CanadaMap from '@/components/CanadaMap';
 import PipelineLayer from '@/components/PipelineLayer';
 import PipelineCard from '@/components/PipelineCard';
 import LayerToggle from '@/components/LayerToggle';
-import { pipelines, PIPELINE_LAYER_LABEL } from '@/lib/pipelines';
+import {
+  getPipelinesByCategory,
+  PIPELINE_CATEGORY_LABELS,
+  type PipelineCategory,
+} from '@/lib/pipelines';
 
-const pipelineSwatchColors = pipelines.features.map((f) => f.properties.color);
+type CategoryConfig = {
+  key: PipelineCategory;
+  label: string;
+  features: ReturnType<typeof getPipelinesByCategory>;
+};
 
 export default function OilGasMapView() {
   const [selectedPipelineId, setSelectedPipelineId] = useState<string | null>(null);
-  const [pipelinesEnabled, setPipelinesEnabled] = useState(true);
+  const [enabled, setEnabled] = useState<Record<PipelineCategory, boolean>>({
+    crude: true,
+    gas: true,
+  });
+
+  const categories = useMemo<CategoryConfig[]>(
+    () => [
+      { key: 'crude', label: PIPELINE_CATEGORY_LABELS.crude, features: getPipelinesByCategory('crude') },
+      { key: 'gas', label: PIPELINE_CATEGORY_LABELS.gas, features: getPipelinesByCategory('gas') },
+    ],
+    [],
+  );
+
+  const anyEnabled = enabled.crude || enabled.gas;
+
+  const toggleCategory = (key: PipelineCategory) => {
+    setEnabled((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      // Clear selection if the selected pipeline's category was just turned off
+      if (!next[key] && selectedPipelineId) {
+        const sel = categories.find((c) => c.key === key)?.features.find(
+          (f) => f.properties.id === selectedPipelineId,
+        );
+        if (sel) setSelectedPipelineId(null);
+      }
+      return next;
+    });
+  };
 
   return (
     <>
       <div className="mb-5 flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap gap-2">
-          <LayerToggle
-            enabled={pipelinesEnabled}
-            onToggle={() => {
-              setPipelinesEnabled((v) => {
-                if (v) setSelectedPipelineId(null);
-                return !v;
-              });
-            }}
-            label={PIPELINE_LAYER_LABEL}
-            count={pipelines.features.length}
-            swatchColors={pipelineSwatchColors}
-          />
+          {categories.map((c) => (
+            <LayerToggle
+              key={c.key}
+              enabled={enabled[c.key]}
+              onToggle={() => toggleCategory(c.key)}
+              label={c.label}
+              count={c.features.length}
+              swatchColors={c.features.map((f) => f.properties.color)}
+            />
+          ))}
         </div>
         <span className="text-xs uppercase tracking-wider text-neutral-400">
-          {pipelinesEnabled ? 'Click a pipeline for details' : 'Hover a region'}
+          {anyEnabled ? 'Click a pipeline for details' : 'Hover a region'}
         </span>
       </div>
 
       <div className="text-neutral-700 dark:text-neutral-300">
         <CanadaMap>
-          {pipelinesEnabled && (
-            <PipelineLayer
-              selectedId={selectedPipelineId}
-              onSelect={setSelectedPipelineId}
-            />
+          {categories.map(
+            (c) =>
+              enabled[c.key] && (
+                <PipelineLayer
+                  key={c.key}
+                  category={c.key}
+                  selectedId={selectedPipelineId}
+                  onSelect={setSelectedPipelineId}
+                />
+              ),
           )}
         </CanadaMap>
       </div>

@@ -6,13 +6,14 @@
       "properties": {
         "id": "enbridge-mainline",
         "name": "Enbridge Mainline",
+        "category": "crude",
         "operator": "Enbridge Inc.",
         "status": "Operational",
         "commodity": "Crude oil — light, heavy, and diluted bitumen (WCS, synthetic crude)",
         "from": { "name": "Edmonton", "province": "AB" },
         "to": { "name": "Superior, WI / Sarnia, ON / US Gulf Coast", "country": "US" },
         "lengthKm": 13700,
-        "capacityBpd": 3000000,
+        "capacity": "3,000,000 bbl/d",
         "inServiceYear": 1950,
         "keyFacts": [
           "The largest crude oil transportation system in North America by capacity.",
@@ -46,13 +47,14 @@
       "properties": {
         "id": "trans-mountain",
         "name": "Trans Mountain Pipeline System",
+        "category": "crude",
         "operator": "Trans Mountain Corporation (Government of Canada)",
         "status": "Operational",
         "commodity": "Crude oil — light crude and diluted bitumen; some refined products",
         "from": { "name": "Edmonton", "province": "AB" },
         "to": { "name": "Burnaby (Westridge Marine Terminal)", "province": "BC" },
         "lengthKm": 1150,
-        "capacityBpd": 890000,
+        "capacity": "890,000 bbl/d",
         "inServiceYear": 1953,
         "keyFacts": [
           "The only Canadian pipeline carrying crude to a Pacific tidewater port — strategic Asian-market access.",
@@ -87,13 +89,14 @@
       "properties": {
         "id": "keystone",
         "name": "Keystone Pipeline (Phases 1–2)",
+        "category": "crude",
         "operator": "South Bow (formerly TC Energy)",
         "status": "Operational",
         "commodity": "Crude oil — primarily diluted bitumen (WCS) and light synthetic crude",
         "from": { "name": "Hardisty", "province": "AB" },
         "to": { "name": "Cushing, OK / Texas Gulf refineries", "country": "US" },
         "lengthKm": 4327,
-        "capacityBpd": 590000,
+        "capacity": "590,000 bbl/d",
         "inServiceYear": 2010,
         "keyFacts": [
           "Connects Alberta's oil sands to US refining hubs at Cushing, OK ('the pipeline crossroads of the world') and the Texas Gulf Coast.",
@@ -118,6 +121,176 @@
           [-101.20, 49.78],
           [-99.50, 49.40],
           [-97.85, 49.00]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "coastal-gaslink",
+        "name": "Coastal GasLink",
+        "category": "gas",
+        "operator": "Coastal GasLink Pipeline LP (TC Energy + KKR + AIMCo + Indigenous partners)",
+        "status": "Operational",
+        "commodity": "Natural gas (dry, sweet — Montney basin)",
+        "from": { "name": "Dawson Creek (Groundbirch)", "province": "BC" },
+        "to": { "name": "Kitimat (LNG Canada terminal)", "province": "BC" },
+        "lengthKm": 670,
+        "capacity": "2,100 MMcf/d",
+        "inServiceYear": 2024,
+        "keyFacts": [
+          "Feeds LNG Canada at Kitimat — Canada's first major Pacific LNG export project, with first cargoes expected mid-2025.",
+          "Carries Montney basin gas (Canada's most prolific gas play) ~670 km west across the BC interior.",
+          "Construction faced sustained Wet'suwet'en hereditary chief opposition over consent and unceded territory (2019–2024).",
+          "Cost rose from ~$6.6B CAD (2018 estimate) to ~$14.5B CAD at completion in 2023.",
+          "Indigenous-led groups acquired a meaningful equity stake in 2024; Cedar LNG is positioned as a future second customer."
+        ],
+        "notes": "First Canadian pipeline built specifically to feed Pacific-coast LNG export. Marks the start of Canada's commercial LNG era after decades of debate and stalled projects.",
+        "color": "#0891b2"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-120.24, 55.77],
+          [-121.50, 55.65],
+          [-123.00, 55.30],
+          [-125.00, 55.00],
+          [-127.00, 54.50],
+          [-128.65, 54.05]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "ngtl",
+        "name": "NGTL System",
+        "category": "gas",
+        "operator": "NOVA Gas Transmission Ltd. (TC Energy)",
+        "status": "Operational",
+        "commodity": "Natural gas (Montney, Duvernay, Deep Basin, oil-sands gas)",
+        "from": { "name": "Western Alberta / Northeast BC gathering", "province": "AB / BC" },
+        "to": { "name": "Empress, AB (TC Mainline) + Foothills (US export)", "province": "AB" },
+        "lengthKm": 24500,
+        "capacity": "~17,000 MMcf/d",
+        "inServiceYear": 1957,
+        "keyFacts": [
+          "The largest natural gas gathering and transmission system in Western Canada — moves gas from Montney, Duvernay, and Deep Basin producers to market.",
+          "Owned by TC Energy under the NOVA Gas Transmission subsidiary; ~24,500 km of pipe with thousands of receipt and delivery points.",
+          "Empress, AB is the eastern delivery point — gas hands off to the TC Energy Canadian Mainline for transport east.",
+          "AECO/NIT (the trading hub at Empress) is one of the most-quoted natural gas benchmarks in North America.",
+          "The Foothills section connects to Northern Border Pipeline at the US border, carrying Western Canadian gas to the US Midwest."
+        ],
+        "notes": "On the map: 4 representative arms shown (Montney gathering, Empress trunk, Foothills/southern leg, Athabasca arm). The actual NGTL system is a network covering most of Alberta and northeast BC.",
+        "color": "#0284c7"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [-120.85, 56.25],
+            [-119.00, 55.00],
+            [-117.00, 54.30],
+            [-115.00, 53.80],
+            [-113.49, 53.55]
+          ],
+          [
+            [-113.49, 53.55],
+            [-112.00, 52.80],
+            [-110.50, 51.80],
+            [-110.00, 50.95]
+          ],
+          [
+            [-113.49, 53.55],
+            [-114.00, 52.20],
+            [-114.07, 51.05],
+            [-113.50, 49.80],
+            [-113.00, 49.00]
+          ],
+          [
+            [-111.38, 56.73],
+            [-112.30, 55.50],
+            [-112.80, 54.50],
+            [-113.49, 53.55]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tc-mainline-gas",
+        "name": "Canadian Mainline (TC Energy)",
+        "category": "gas",
+        "operator": "TC Energy",
+        "status": "Operational",
+        "commodity": "Natural gas (WCSB-sourced; some receipts from US Marcellus via Niagara)",
+        "from": { "name": "Empress", "province": "AB" },
+        "to": { "name": "Eastern Canada (Ontario, Quebec, Maritimes)", "province": "QC" },
+        "lengthKm": 14114,
+        "capacity": "~7,000 MMcf/d",
+        "inServiceYear": 1958,
+        "keyFacts": [
+          "Carries Western Canadian gas (handed off from NGTL at Empress) across the country to Ontario, Quebec, and the Maritimes.",
+          "~14,000 km of pipe across the Canadian Shield, the Great Lakes basin, and the St. Lawrence corridor.",
+          "Has become structurally underutilized as US shale (Marcellus) flipped Eastern Canada from net importer-from-the-west to net importer-from-the-south.",
+          "Dawn, Ontario is one of the most liquid North American gas trading hubs outside Henry Hub.",
+          "Mainline tolling structure is a perennial regulatory battle — biggest single lever on prairie gas producer netbacks."
+        ],
+        "notes": "Originally built by TransCanada in the 1950s, the Canadian Mainline became a defining piece of Canadian energy infrastructure. The politics and economics around it have shifted more than the steel itself.",
+        "color": "#4f46e5"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-110.00, 50.95],
+          [-104.62, 50.45],
+          [-101.20, 49.78],
+          [-97.00, 49.50],
+          [-91.00, 49.00],
+          [-86.00, 48.00],
+          [-82.00, 46.50],
+          [-79.40, 43.70],
+          [-75.50, 45.40],
+          [-73.50, 45.50],
+          [-71.20, 46.80]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "westcoast-energy",
+        "name": "Westcoast Energy (BC Pipeline)",
+        "category": "gas",
+        "operator": "Enbridge (acquired Spectra Energy 2017)",
+        "status": "Operational",
+        "commodity": "Natural gas (Montney, Horn River basin)",
+        "from": { "name": "Fort Nelson area", "province": "BC" },
+        "to": { "name": "Sumas / Huntingdon (US Pacific Northwest border)", "province": "BC" },
+        "lengthKm": 2900,
+        "capacity": "2,940 MMcf/d",
+        "inServiceYear": 1957,
+        "keyFacts": [
+          "BC's main gas transmission backbone — moves Montney and Horn River gas south through the BC interior to the US Pacific Northwest.",
+          "Sumas / Huntingdon border crossing is a key delivery point to Washington and Oregon gas markets.",
+          "Spectra-owned for decades; Enbridge acquired Spectra in 2017, putting it under the same parent as the Mainline crude system.",
+          "A 2018 rupture near Prince George reduced capacity for months and exposed corrosion vulnerabilities in the older pipe.",
+          "T-South line runs the southern portion; T-North gathers from the BC interior north of Prince George."
+        ],
+        "notes": "BC's primary pipeline export route for gas heading to US Pacific Northwest markets.",
+        "color": "#0d9488"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-122.69, 58.81],
+          [-122.50, 57.00],
+          [-122.00, 55.00],
+          [-121.50, 53.00],
+          [-121.00, 51.50],
+          [-121.00, 50.00],
+          [-122.27, 49.00]
         ]
       }
     }

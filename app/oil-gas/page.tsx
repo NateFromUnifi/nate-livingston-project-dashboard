@@ -43,10 +43,6 @@ export default function OilGasPage() {
         </h2>
         <ul className="space-y-3 text-neutral-600 dark:text-neutral-400">
           <li>
-            <strong className="text-neutral-900 dark:text-neutral-100">Natural gas pipelines</strong>{' '}
-            — NGTL system, Coastal GasLink, TC Mainline.
-          </li>
-          <li>
             <strong className="text-neutral-900 dark:text-neutral-100">Production basins</strong> —
             WCSB, Montney, Duvernay, and the Oil Sands regions.
           </li>

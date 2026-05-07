@@ -2,29 +2,33 @@
 
 import { useMemo } from 'react';
 import { useCanadaProjection } from '@/components/CanadaMap';
-import { pipelines } from '@/lib/pipelines';
+import {
+  getPipelinesByCategory,
+  type PipelineCategory,
+} from '@/lib/pipelines';
 
 type Props = {
+  category: PipelineCategory;
   selectedId: string | null;
   onSelect: (id: string) => void;
 };
 
-export default function PipelineLayer({ selectedId, onSelect }: Props) {
+export default function PipelineLayer({ category, selectedId, onSelect }: Props) {
   const { pathFn } = useCanadaProjection();
 
   const items = useMemo(() => {
-    return pipelines.features.map((f) => ({
+    return getPipelinesByCategory(category).map((f) => ({
       id: f.properties.id,
       name: f.properties.name,
       color: f.properties.color,
       d: pathFn(f) ?? '',
     }));
-  }, [pathFn]);
+  }, [category, pathFn]);
 
   const hasSelection = selectedId !== null;
 
   return (
-    <g aria-label="Crude oil pipelines">
+    <g aria-label={`${category} pipelines`}>
       {items.map((p) => {
         const isSelected = p.id === selectedId;
         const isDimmed = hasSelection && !isSelected;
