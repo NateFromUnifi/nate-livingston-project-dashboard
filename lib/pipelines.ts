@@ -3,6 +3,11 @@ import data from '@/data/pipelines.json';
 
 export type PipelineCategory = 'crude' | 'gas';
 
+// Direction of physical flow along the pipeline. 'forward' = direction of
+// the GeoJSON LineString coordinates (from-to); 'reverse' = opposite;
+// 'bidirectional' = the line moves product both ways (e.g., gathering networks).
+export type FlowDirection = 'forward' | 'reverse' | 'bidirectional';
+
 export type PipelineEndpoint = {
   name: string;
   province?: string;
@@ -23,6 +28,7 @@ export type PipelineProperties = {
   inServiceYear: number;
   operatorLogo?: string;
   operatorLogoOnDark?: boolean;
+  flowDirection?: FlowDirection;
   keyFacts: string[];
   notes?: string;
   color: string;

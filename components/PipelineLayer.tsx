@@ -4,6 +4,7 @@ import { useMemo, useState } from 'react';
 import { useCanadaProjection } from '@/components/CanadaMap';
 import {
   getPipelinesByCategory,
+  type FlowDirection,
   type PipelineCategory,
 } from '@/lib/pipelines';
 
@@ -21,6 +22,7 @@ export default function PipelineLayer({ category, selectedId, onSelect }: Props)
 
   const items = useMemo(() => {
     return getPipelinesByCategory(category).map((f) => {
+      const flowDirection = f.properties.flowDirection;
       // Anchor the floating hover label at the line's midpoint vertex.
       // For MultiLineString (NGTL), pick the longest segment's midpoint.
       let midPoint: Pt;
@@ -41,6 +43,7 @@ export default function PipelineLayer({ category, selectedId, onSelect }: Props)
         name: f.properties.name,
         color: f.properties.color,
         d: pathFn(f) ?? '',
+        flowDirection,
         labelX: midPoint[0],
         labelY: midPoint[1] - 14,
       };
@@ -102,6 +105,10 @@ export default function PipelineLayer({ category, selectedId, onSelect }: Props)
             >
               <title>{p.name}</title>
             </path>
+            {/* Flow-direction animation — only on the selected pipeline */}
+            {isSelected && p.flowDirection && (
+              <FlowOverlay d={p.d} direction={p.flowDirection} />
+            )}
           </g>
         );
       })}
@@ -110,6 +117,53 @@ export default function PipelineLayer({ category, selectedId, onSelect }: Props)
         <PipelineLabel x={hovered.labelX} y={hovered.labelY} name={hovered.name} />
       )}
     </g>
+  );
+}
+
+function FlowOverlay({ d, direction }: { d: string; direction: FlowDirection }) {
+  // Bidirectional pipelines (e.g., NGTL gathering networks) render two
+  // overlapping flowing-dash overlays — one each way — so the viewer sees
+  // both directions of movement simultaneously.
+  if (direction === 'bidirectional') {
+    return (
+      <>
+        <path
+          d={d}
+          stroke="white"
+          strokeWidth={2}
+          strokeDasharray="6 14"
+          strokeLinecap="round"
+          fill="none"
+          pointerEvents="none"
+          opacity={0.65}
+          className="pipeline-flow-fwd"
+        />
+        <path
+          d={d}
+          stroke="white"
+          strokeWidth={2}
+          strokeDasharray="6 14"
+          strokeLinecap="round"
+          fill="none"
+          pointerEvents="none"
+          opacity={0.65}
+          className="pipeline-flow-rev"
+        />
+      </>
+    );
+  }
+  return (
+    <path
+      d={d}
+      stroke="white"
+      strokeWidth={2}
+      strokeDasharray="6 14"
+      strokeLinecap="round"
+      fill="none"
+      pointerEvents="none"
+      opacity={0.85}
+      className={direction === 'forward' ? 'pipeline-flow-fwd' : 'pipeline-flow-rev'}
+    />
   );
 }
 
