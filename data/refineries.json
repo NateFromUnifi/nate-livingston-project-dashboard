@@ -1,0 +1,264 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "suncor-base-plant",
+        "name": "Suncor Base Plant",
+        "type": "upgrader",
+        "operator": "Suncor Energy",
+        "operatorLogo": "/logos/suncor.png",
+        "status": "Operational",
+        "capacity": "~350,000 bbl/d (mine + upgrade)",
+        "inputs": "Mined oil sands ore + in-situ bitumen (Athabasca)",
+        "outputs": "Synthetic crude oil — Suncor Sweet Premium (SSP)",
+        "process": "Open-pit mining of oil sands ore → ore is crushed and mixed with hot water to separate bitumen from sand → bitumen is upgraded via thermal cracking, fluid coking, and hydrotreating into a high-quality light synthetic crude.",
+        "location": { "city": "Fort McMurray", "province": "AB" },
+        "inServiceYear": 1967,
+        "keyFacts": [
+          "The original commercial oil sands operation in Canada — operating since 1967 (then 'Great Canadian Oil Sands').",
+          "Combines an open-pit mine, extraction plant, and upgrader on a single integrated site.",
+          "Output is Suncor Sweet Premium (SSP) — a light, sweet synthetic crude that prices near WTI.",
+          "Suncor was historically Canada's largest oil & gas company by revenue prior to TC Energy / South Bow split.",
+          "Site has gone through multiple expansion phases (Millennium, Voyageur South); some were cancelled (Voyageur North coker)."
+        ],
+        "color": "#1e293b"
+      },
+      "geometry": { "type": "Point", "coordinates": [-111.49, 56.99] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "syncrude-mildred-lake",
+        "name": "Syncrude Mildred Lake",
+        "type": "upgrader",
+        "operator": "Canadian Natural Resources (CNRL, Syncrude operator)",
+        "operatorLogo": "/logos/cnrl.png",
+        "status": "Operational",
+        "capacity": "~350,000 bbl/d (rated)",
+        "inputs": "Mined oil sands ore (Mildred Lake + Aurora mines)",
+        "outputs": "Synthetic crude oil — Syncrude Sweet Premium (SSP)",
+        "process": "Open-pit mining + hot water extraction of bitumen from oil sands ore → upgrading via fluid coking and hydroprocessing into a benchmark light synthetic crude.",
+        "location": { "city": "Fort McMurray", "province": "AB" },
+        "inServiceYear": 1978,
+        "keyFacts": [
+          "Originally a joint venture among Imperial, Petro-Canada, Esso, and others; consolidated under CNRL after a 2017 buyout.",
+          "CNRL became operator and ~70% owner in 2017 when it acquired Marathon Oil's stake.",
+          "Largest single-site oil sands operation by mine size.",
+          "Output is marketed as Syncrude Sweet Premium (SSP) — a benchmark light SCO grade.",
+          "Mildred Lake mine has operated since 1978; nearby Aurora mine added in 2000 to extend resource life."
+        ],
+        "color": "#1e293b"
+      },
+      "geometry": { "type": "Point", "coordinates": [-111.61, 57.04] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cenovus-lloydminster-upgrader",
+        "name": "Cenovus Lloydminster Upgrader",
+        "type": "upgrader",
+        "operator": "Cenovus Energy",
+        "operatorLogo": "/logos/cenovus.png",
+        "status": "Operational",
+        "capacity": "~80,000 bbl/d",
+        "inputs": "Heavy oil + bitumen blend (Lloydminster heavy oil region)",
+        "outputs": "Synthetic crude blend, asphalt, diesel",
+        "process": "Heavy oil and bitumen blends are processed via delayed coking and hydrocracking to produce synthetic crude blend, with asphalt and diesel as byproducts. Co-located with the Husky-now-Cenovus Lloydminster refinery for further processing.",
+        "location": { "city": "Lloydminster", "province": "SK" },
+        "inServiceYear": 1992,
+        "keyFacts": [
+          "Heavy oil upgrader purpose-built for Lloydminster heavy oil reserves.",
+          "Originally a Husky Energy asset — became Cenovus's after the 2021 Husky-Cenovus merger.",
+          "Smaller than the Fort McMurray upgraders but strategic for processing heavy oil that's difficult to pipeline.",
+          "Lloydminster sits on the AB / SK border — historically the heart of Canadian heavy-oil production.",
+          "Co-located refinery (Lloydminster Refinery) takes the upgraded output and produces transportation fuels."
+        ],
+        "color": "#1e293b"
+      },
+      "geometry": { "type": "Point", "coordinates": [-110.00, 53.28] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "shell-scotford",
+        "name": "Shell Scotford Complex",
+        "type": "integrated",
+        "operator": "Shell Canada (Shell plc)",
+        "operatorLogo": "/logos/shell.png",
+        "status": "Operational",
+        "capacity": "~250,000 bbl/d upgrader + ~100,000 bbl/d refinery",
+        "inputs": "Bitumen from AOSP mine (piped in) + light + heavy crude (refinery side)",
+        "outputs": "Synthetic crude oil + gasoline, diesel, jet fuel, petrochemical feedstocks",
+        "process": "Adjacent upgrader (Athabasca Oil Sands Project / AOSP) processes mined bitumen into SCO via hydroprocessing. The refinery then converts SCO and conventional crude into transportation fuels using catalytic cracking, hydrotreating, and reforming.",
+        "location": { "city": "Fort Saskatchewan", "province": "AB" },
+        "inServiceYear": 1984,
+        "keyFacts": [
+          "One of only two integrated upgrader-refinery complexes in Canada (Suncor Base Plant being the rough other).",
+          "AOSP upgrader processes bitumen piped in from the Albian Sands mine north of Fort McMurray.",
+          "On-site Quest CCS facility captures ~1 Mt CO2 per year — first commercial-scale oil-sands CCS project (operational since 2015).",
+          "Shell sold its mining stake (Albian Sands) to CNRL in 2017 but retained the upgrader — CNRL now supplies the bitumen.",
+          "Adjacent to Edmonton's industrial heartland; one of the largest single industrial sites in Western Canada."
+        ],
+        "color": "#059669"
+      },
+      "geometry": { "type": "Point", "coordinates": [-113.12, 53.72] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "imperial-strathcona",
+        "name": "Imperial Strathcona Refinery",
+        "type": "refinery",
+        "operator": "Imperial Oil",
+        "operatorLogo": "/logos/imperial-oil.png",
+        "status": "Operational",
+        "capacity": "~191,000 bbl/d",
+        "inputs": "Light + heavy crude (WCSB) + synthetic crude from Imperial's oil sands operations",
+        "outputs": "Gasoline, diesel, jet fuel, asphalt, lubricants",
+        "process": "Atmospheric and vacuum distillation, fluid catalytic cracking (FCC), hydrocracking, and reforming — a full complex refinery configuration. Produces a complete slate of transportation fuels.",
+        "location": { "city": "Edmonton", "province": "AB" },
+        "inServiceYear": 1948,
+        "keyFacts": [
+          "Largest refinery in Western Canada by capacity.",
+          "Imperial Oil = ExxonMobil's Canadian arm (~70% Exxon-owned).",
+          "Processes a mix of conventional crude and synthetic crude from Imperial's own oil sands operations (Cold Lake + Kearl).",
+          "Located in east Edmonton's industrial heartland — adjacent to Suncor Edmonton refinery.",
+          "Strathcona is also Imperial's R&D campus and Western Canadian corporate office."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-113.21, 53.55] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "suncor-edmonton",
+        "name": "Suncor Edmonton Refinery",
+        "type": "refinery",
+        "operator": "Suncor Energy",
+        "operatorLogo": "/logos/suncor.png",
+        "status": "Operational",
+        "capacity": "~146,000 bbl/d",
+        "inputs": "Light crude + synthetic crude (Suncor's own SCO from Base Plant + Firebag) + heavy crude",
+        "outputs": "Gasoline, diesel, jet fuel, asphalt",
+        "process": "Crude distillation + FCC + hydrotreating to produce gasoline, diesel, jet, and asphalt. Heavy oil capable; processes a significant share of Suncor's own upgraded SCO from the Base Plant.",
+        "location": { "city": "Edmonton (Sherwood Park)", "province": "AB" },
+        "inServiceYear": 1953,
+        "keyFacts": [
+          "Co-located with Imperial Strathcona in the Edmonton refining corridor.",
+          "Processes Suncor's own SCO (from Base Plant + Firebag in-situ) plus conventional crude.",
+          "Supplies Petro-Canada-branded gas stations (Suncor owns Petro-Canada).",
+          "Sometimes referenced as the Sherwood Park refinery (the immediate municipality)."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-113.27, 53.66] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "co-op-regina",
+        "name": "Co-op Refinery Complex",
+        "type": "refinery",
+        "operator": "Federated Co-operatives Limited (FCL)",
+        "operatorLogo": "/logos/federated-coop.png",
+        "status": "Operational",
+        "capacity": "~145,000 bbl/d",
+        "inputs": "Light + heavy crude (WCSB)",
+        "outputs": "Gasoline, diesel, propane, asphalt",
+        "process": "Atmospheric and vacuum distillation, fluid catalytic cracking, hydrotreating, and asphalt production. Supplies Co-op-branded fuel stations across Western Canada.",
+        "location": { "city": "Regina", "province": "SK" },
+        "inServiceYear": 1935,
+        "keyFacts": [
+          "Owned by Federated Co-operatives Limited (FCL) — the wholesale arm of the Western Canadian Co-op retail network.",
+          "Unique structure: a co-op-owned refinery — products distributed through Co-op gas stations across the Prairies and BC.",
+          "Has expanded multiple times; produces a full slate of fuels plus asphalt for Western Canadian roads.",
+          "Subject of a high-profile labour dispute in 2019–2020 with Unifor — one of the longest lockouts in Canadian history.",
+          "Strategic for prairie fuel supply — competes with major-branded refineries."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-104.49, 50.49] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "imperial-sarnia",
+        "name": "Imperial Sarnia Refinery",
+        "type": "refinery",
+        "operator": "Imperial Oil",
+        "operatorLogo": "/logos/imperial-oil.png",
+        "status": "Operational",
+        "capacity": "~120,000 bbl/d",
+        "inputs": "Light + heavy crude (Enbridge Mainline / Line 5 / Line 9 routes)",
+        "outputs": "Gasoline, diesel, jet fuel, lubricants, petrochemical feedstocks",
+        "process": "Atmospheric and vacuum distillation, fluid catalytic cracking (FCC), hydrocracking, alkylation. Petrochemical-integrated (BTX, ethylene feedstocks). Part of Sarnia's industrial corridor.",
+        "location": { "city": "Sarnia", "province": "ON" },
+        "inServiceYear": 1898,
+        "keyFacts": [
+          "Sarnia is Canada's petrochemical hub — multiple refineries and chemical plants in close proximity ('Chemical Valley').",
+          "Imperial Sarnia produces fuels + petrochemical feedstocks; supplies Esso-branded stations across Eastern Canada.",
+          "Crude feed comes via the Enbridge Mainline (Line 5 / Line 9 routes through Sarnia).",
+          "Adjacent to Imperial's Sarnia chemical plant — integrated petrochemical operations.",
+          "One of the oldest continuously-operating refineries in North America (since 1898)."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-82.40, 42.97] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "irving-saint-john",
+        "name": "Irving Saint John Refinery",
+        "type": "refinery",
+        "operator": "Irving Oil",
+        "operatorLogo": "/logos/irving-oil.png",
+        "status": "Operational",
+        "capacity": "~320,000 bbl/d (largest in Canada)",
+        "inputs": "Imported crude (Saudi Arabia, US Gulf, North Sea — diversified post-2014)",
+        "outputs": "Gasoline, diesel, jet fuel — ~50% exported to US East Coast markets",
+        "process": "Atmospheric and vacuum distillation, FCC, alkylation, hydrocracking — a full complex refinery. Tidewater location enables imported crude inputs and exported product outputs via tanker.",
+        "location": { "city": "Saint John", "province": "NB" },
+        "inServiceYear": 1960,
+        "keyFacts": [
+          "The largest single oil refinery in Canada by capacity (~320,000 bbl/d).",
+          "Tidewater location at Saint John, NB — exports gasoline and diesel to US East Coast markets.",
+          "Owned by the Irving family (Irving Oil + J.D. Irving — one of Canada's wealthiest private business empires).",
+          "No pipeline access from WCSB — crude feed is mostly imported (historically Saudi/Mideast, now diversified globally).",
+          "Strategic role in Canadian energy security — Eastern Canada's largest refining capacity by a wide margin."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-65.99, 45.27] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "parkland-burnaby",
+        "name": "Parkland Burnaby Refinery",
+        "type": "refinery",
+        "operator": "Parkland Corporation",
+        "operatorLogo": "/logos/parkland.png",
+        "status": "Operational",
+        "capacity": "~55,000 bbl/d (only BC refinery)",
+        "inputs": "Light crude (TMX-fed) + Alaskan crude",
+        "outputs": "Gasoline, diesel, jet fuel for the BC market",
+        "process": "Atmospheric distillation + hydrotreating + reforming. Smaller and simpler than other Canadian refineries — meets local BC fuel demand. Light crude only (no coking or heavy oil capability).",
+        "location": { "city": "Burnaby", "province": "BC" },
+        "inServiceYear": 1935,
+        "keyFacts": [
+          "The only operating refinery in British Columbia.",
+          "Owned by Parkland Corporation — Canadian fuel retailer (operates Chevron-, On the Run-, and other-branded stations).",
+          "Crude feed via Trans Mountain Pipeline (light crude only — no heavy oil capability).",
+          "Smaller and simpler than other Canadian refineries — meets BC's local fuel demand.",
+          "Facility has been operating since 1935 — one of the oldest BC industrial sites."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.92, 49.29] }
+    }
+  ]
+}

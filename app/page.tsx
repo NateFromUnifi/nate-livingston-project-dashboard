@@ -36,15 +36,13 @@ export default function Home() {
     <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col px-6 py-16 md:py-24">
       <header className="mb-16">
         <p className="mb-4 text-xs uppercase tracking-[0.2em] text-neutral-500">
-          Finance · Energy · Equity Research
+          Project Portfolio
         </p>
         <h1 className="mb-4 font-serif text-5xl font-medium tracking-tight text-neutral-900 dark:text-neutral-50">
-          Nate Livingston
+          Nathaniel Livingston
         </h1>
         <p className="max-w-2xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-300">
-          Mount Royal University finance student building toward an investment club analyst role and
-          a 2027 Calgary internship. Projects below — energy primers, valuations, and equity
-          research — are works in progress.
+          Finance student with passions for Financial Markets, Energy, Equity Research, and Investing.
         </p>
       </header>
 
