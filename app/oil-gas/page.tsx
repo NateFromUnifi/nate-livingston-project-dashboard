@@ -39,22 +39,6 @@ export default function OilGasPage() {
       </section>
 
       <PriceCards />
-
-      <section className="mt-12">
-        <h2 className="mb-4 font-serif text-xl text-neutral-900 dark:text-neutral-50">
-          Coming next
-        </h2>
-        <ul className="space-y-3 text-neutral-600 dark:text-neutral-400">
-          <li>
-            <strong className="text-neutral-900 dark:text-neutral-100">East Coast offshore</strong>{' '}
-            — Hibernia, Hebron, and White Rose off Newfoundland (the only major non-WCSB Canadian production).
-          </li>
-          <li>
-            <strong className="text-neutral-900 dark:text-neutral-100">Proposed and cancelled projects</strong>{' '}
-            — Keystone XL, greenfield LNG, hydrogen, and CCUS sites.
-          </li>
-        </ul>
-      </section>
     </div>
   );
 }
