@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import OilGasMapView from '@/components/OilGasMapView';
+import PriceCards from '@/components/PriceCards';
 
 export const metadata = {
   title: 'Canadian Oil & Gas Primer — Nate Livingston',
@@ -36,6 +37,8 @@ export default function OilGasPage() {
         </h2>
         <OilGasMapView />
       </section>
+
+      <PriceCards />
 
       <section className="mt-12">
         <h2 className="mb-4 font-serif text-xl text-neutral-900 dark:text-neutral-50">
