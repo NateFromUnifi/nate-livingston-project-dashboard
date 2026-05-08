@@ -1,0 +1,138 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "westridge-marine-terminal",
+        "name": "Westridge Marine Terminal",
+        "type": "oil",
+        "operator": "Trans Mountain Corporation (Government of Canada)",
+        "operatorLogo": "/logos/trans-mountain.png",
+        "status": "Operational",
+        "volume": "~890,000 bbl/d (TMX-fed export capacity)",
+        "inputs": "Trans Mountain Pipeline System (light crude + diluted bitumen from Edmonton)",
+        "exportMarkets": "Asia (China, India, South Korea), US West Coast refineries",
+        "vesselTypes": "Aframax tankers (~750,000 bbl per cargo) — the largest class the Burrard Inlet can accommodate",
+        "location": { "city": "Burnaby", "province": "BC" },
+        "inServiceYear": 1953,
+        "keyFacts": [
+          "The only Canadian crude oil export terminal on the Pacific Coast — strategic Asian-market access.",
+          "TMX expansion (June 2024) tripled effective Westridge throughput from ~300K to ~890K bbl/d, materially shifting Canadian crude trade flows.",
+          "Aframax-only — the dock and vessel size are constrained by the geography of Burrard Inlet (Second Narrows depth + width).",
+          "Canadian crude (mostly diluted bitumen) leaving Westridge has narrowed the WCS / WTI price differential by reaching new buyers post-2024.",
+          "Owned by the Government of Canada (via Trans Mountain Corp.) since the 2018 federal acquisition of Kinder Morgan Canada."
+        ],
+        "notes": "On the map: pin sits at the Burrard Inlet anchorage; visually adjacent to where the Trans Mountain pipeline terminus pin would be.",
+        "color": "#1e40af"
+      },
+      "geometry": { "type": "Point", "coordinates": [-122.929, 49.297] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "lng-canada-kitimat",
+        "name": "LNG Canada (Kitimat)",
+        "type": "lng",
+        "operator": "LNG Canada JV (Shell · Petronas · Mitsubishi · KOGAS · PetroChina) — Shell-operated",
+        "operatorLogo": "/logos/shell.png",
+        "status": "Commissioning",
+        "volume": "Phase 1: 14 Mtpa LNG (~1.8 Bcf/d feedgas equivalent); Phase 2 expansion would double",
+        "inputs": "Coastal GasLink pipeline (Montney basin gas via Dawson Creek)",
+        "exportMarkets": "Asia-Pacific (Japan, South Korea, China, Taiwan) — primary buyers via long-term offtake contracts",
+        "vesselTypes": "Q-Flex / Q-Max LNG carriers (~210,000 m³ to ~265,000 m³ per cargo)",
+        "location": { "city": "Kitimat", "province": "BC" },
+        "inServiceYear": 2025,
+        "keyFacts": [
+          "First major Canadian LNG export terminal — first cargoes loading in mid-2025 after a 7-year construction.",
+          "$40B+ CAD capital project — one of the largest single private-sector investments in Canadian history.",
+          "Shell holds 40% and is the operator; Petronas, Mitsubishi, KOGAS, and PetroChina hold the remaining 60%.",
+          "Phase 1 capacity is 14 Mtpa across two trains; FID for Phase 2 (doubling capacity) pending.",
+          "Marks the start of Canada's commercial LNG era — historically Canada had built no LNG export terminals despite decades of debate."
+        ],
+        "notes": "Kitimat sits at the head of Douglas Channel — a deepwater fjord connecting to the Pacific via Hecate Strait. Tankers transit the channel under Coast Guard escort.",
+        "color": "#0d9488"
+      },
+      "geometry": { "type": "Point", "coordinates": [-128.673, 54.053] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "saint-john-tanker-terminal",
+        "name": "Saint John Tanker Terminal",
+        "type": "oil",
+        "operator": "Irving Oil",
+        "operatorLogo": "/logos/irving-oil.png",
+        "status": "Operational",
+        "volume": "Two-way: ~300K bbl/d crude imports + ~150K bbl/d refined product exports",
+        "inputs": "Imported crude (Saudi Arabia, US Gulf, North Sea — diversified post-2014); no Canadian pipeline access",
+        "exportMarkets": "US East Coast (gasoline, diesel via tanker to PADD 1) — about half of Irving Saint John refinery output is exported",
+        "vesselTypes": "VLCC and Suezmax crude tankers inbound; Medium-Range product tankers outbound",
+        "location": { "city": "Saint John", "province": "NB" },
+        "inServiceYear": 1960,
+        "keyFacts": [
+          "The largest oil port on the Canadian East Coast — supplies the Irving Saint John refinery (Canada's largest, ~320K bbl/d).",
+          "No pipeline access from WCSB — all crude inputs arrive by tanker (rail volumes have come and gone with arbitrage economics).",
+          "Adjacent to the (idle) Canaport LNG import terminal, which was repurposed-for-export plans were paused after the 2014 oil-price crash.",
+          "Tidewater location enables both Saudi-Mideast and US Gulf crude inputs and US East Coast product exports.",
+          "Owned by the Irving family (Irving Oil + J.D. Irving Limited) — one of Canada's largest privately-held conglomerates."
+        ],
+        "notes": "Tanker dock is at Mispec Point, ~5 km east of the Saint John refinery itself; connected by Irving's own pipeline.",
+        "color": "#1e40af"
+      },
+      "geometry": { "type": "Point", "coordinates": [-66.030, 45.247] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cedar-lng",
+        "name": "Cedar LNG",
+        "type": "lng",
+        "operator": "Cedar LNG Project Ltd. (Haisla Nation 50.1% · Pembina Pipeline 49.9%)",
+        "status": "Under construction",
+        "volume": "Planned: 3 Mtpa LNG (target service date late 2028)",
+        "inputs": "Coastal GasLink pipeline (Montney basin gas) — same upstream feed as LNG Canada",
+        "exportMarkets": "Asia-Pacific — long-term offtake contracts being finalized; smaller scale than LNG Canada targets premium spot pricing",
+        "vesselTypes": "Mid-scale LNG carriers (~125,000 m³ per cargo) — smaller than LNG Canada's Q-Flex fleet",
+        "location": { "city": "Bish Cove (near Kitimat)", "province": "BC" },
+        "inServiceYear": 2028,
+        "keyFacts": [
+          "First Indigenous-majority-owned LNG export project in the world — Haisla Nation holds majority (50.1%) ownership.",
+          "FID (final investment decision) reached in June 2023; estimated ~$3.4B CAD capital cost.",
+          "Floating LNG (FLNG) facility — barge-mounted liquefaction units rather than land-based trains, which speeds construction.",
+          "Pembina Pipeline Corp. is the technical operator (49.9% partner); Haisla holds majority equity and ultimate decision-making.",
+          "Often paired with LNG Canada in 'Canadian Pacific LNG' narrative — together they anchor Kitimat as Canada's gas-export hub."
+        ],
+        "notes": "Site is at Bish Cove, ~25 km south of LNG Canada at Kitimat — same Douglas Channel marine corridor.",
+        "color": "#0d9488"
+      },
+      "geometry": { "type": "Point", "coordinates": [-128.55, 53.78] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "woodfibre-lng",
+        "name": "Woodfibre LNG",
+        "type": "lng",
+        "operator": "Pacific Energy Corporation (RGE / Singapore-based parent)",
+        "status": "Under construction",
+        "volume": "Planned: 2.1 Mtpa LNG (target first cargo late 2027)",
+        "inputs": "FortisBC's Eagle Mountain–Woodfibre Gas Pipeline (FortisBC system, BC-sourced gas)",
+        "exportMarkets": "Asia-Pacific — primarily Japan and South Korea via long-term BP offtake contract",
+        "vesselTypes": "Mid-scale LNG carriers (~165,000 m³ per cargo)",
+        "location": { "city": "Squamish (Howe Sound)", "province": "BC" },
+        "inServiceYear": 2027,
+        "keyFacts": [
+          "Smallest of the three under-construction Canadian LNG projects — a 'right-sized' play vs LNG Canada's mega-scale.",
+          "Owned by Pacific Energy (ultimately RGE Group, a Singaporean conglomerate); BP holds the long-term offtake.",
+          "Located on the site of a former pulp mill in Squamish — uses existing brownfield infrastructure to speed permitting.",
+          "FID reached in 2022 after years of regulatory and Indigenous-consent process; first electric-drive LNG plant in North America.",
+          "Howe Sound location places tankers within ~50 km of Vancouver — controversial for marine traffic + viewscape concerns."
+        ],
+        "notes": "Squamish sits at the head of Howe Sound; tankers transit via the Sound to Strait of Georgia and out the Juan de Fuca Strait.",
+        "color": "#0d9488"
+      },
+      "geometry": { "type": "Point", "coordinates": [-123.275, 49.638] }
+    }
+  ]
+}

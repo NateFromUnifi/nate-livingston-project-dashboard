@@ -8,6 +8,8 @@ import BasinLayer from '@/components/BasinLayer';
 import BasinCard from '@/components/BasinCard';
 import RefineryLayer from '@/components/RefineryLayer';
 import RefineryCard from '@/components/RefineryCard';
+import PortLayer from '@/components/PortLayer';
+import PortCard from '@/components/PortCard';
 import LayerToggle from '@/components/LayerToggle';
 import {
   getPipelinesByCategory,
@@ -28,6 +30,7 @@ import {
   UPGRADER_SWATCH,
   type DownstreamCategory,
 } from '@/lib/refineries';
+import { ports, PORT_LAYER_LABEL, PORT_SWATCH_COLORS } from '@/lib/ports';
 
 type CategoryConfig = {
   key: PipelineCategory;
@@ -39,6 +42,7 @@ type Selection =
   | { kind: 'pipeline'; id: string }
   | { kind: 'basin'; id: string }
   | { kind: 'refinery'; id: string }
+  | { kind: 'port'; id: string }
   | null;
 
 export default function OilGasMapView() {
@@ -46,6 +50,7 @@ export default function OilGasMapView() {
   const [activeCategory, setActiveCategory] = useState<PipelineCategory | null>('crude');
   const [basinsEnabled, setBasinsEnabled] = useState(true);
   const [activeDownstream, setActiveDownstream] = useState<DownstreamCategory | null>('refinery');
+  const [portsEnabled, setPortsEnabled] = useState(true);
 
   const categories = useMemo<CategoryConfig[]>(
     () => [
@@ -72,15 +77,22 @@ export default function OilGasMapView() {
     if (selection?.kind === 'refinery') setSelection(null);
   };
 
+  const togglePorts = () => {
+    setPortsEnabled((prev) => !prev);
+    if (portsEnabled && selection?.kind === 'port') setSelection(null);
+  };
+
   const selectedPipelineId = selection?.kind === 'pipeline' ? selection.id : null;
   const selectedBasinId = selection?.kind === 'basin' ? selection.id : null;
   const selectedRefineryId = selection?.kind === 'refinery' ? selection.id : null;
+  const selectedPortId = selection?.kind === 'port' ? selection.id : null;
 
   const hint = (() => {
     const parts: string[] = [];
     if (activeCategory) parts.push('pipeline');
     if (basinsEnabled) parts.push('basin');
     if (activeDownstream) parts.push('facility');
+    if (portsEnabled) parts.push('port');
     if (parts.length === 0) return 'Hover a region';
     if (parts.length === 1) return `Click a ${parts[0]} for details`;
     if (parts.length === 2) return `Click a ${parts[0]} or ${parts[1]} for details`;
@@ -135,6 +147,16 @@ export default function OilGasMapView() {
               swatchColors={REFINERY_SWATCH}
             />
           </div>
+          <span className="ml-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
+            Trade
+          </span>
+          <LayerToggle
+            enabled={portsEnabled}
+            onToggle={togglePorts}
+            label={PORT_LAYER_LABEL}
+            count={ports.features.length}
+            swatchColors={PORT_SWATCH_COLORS}
+          />
         </div>
         <span className="text-xs uppercase tracking-wider text-neutral-400">{hint}</span>
       </div>
@@ -161,12 +183,19 @@ export default function OilGasMapView() {
               onSelect={(id) => setSelection({ kind: 'refinery', id })}
             />
           )}
+          {portsEnabled && (
+            <PortLayer
+              selectedId={selectedPortId}
+              onSelect={(id) => setSelection({ kind: 'port', id })}
+            />
+          )}
         </CanadaMap>
       </div>
 
       <PipelineCard selectedId={selectedPipelineId} onClose={() => setSelection(null)} />
       <BasinCard selectedId={selectedBasinId} onClose={() => setSelection(null)} />
       <RefineryCard selectedId={selectedRefineryId} onClose={() => setSelection(null)} />
+      <PortCard selectedId={selectedPortId} onClose={() => setSelection(null)} />
     </>
   );
 }
