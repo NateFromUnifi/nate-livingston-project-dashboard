@@ -24,24 +24,3 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
-
-/* Pipeline flow-direction animation — applied to a stroke-dashed overlay
-   path on the SELECTED pipeline. Dasharray pattern total length is 20 px,
-   so animating offset by 20 cycles the pattern exactly once. */
-@keyframes pipeline-flow-fwd {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: -20; }
-}
-
-@keyframes pipeline-flow-rev {
-  from { stroke-dashoffset: 0; }
-  to { stroke-dashoffset: 20; }
-}
-
-.pipeline-flow-fwd {
-  animation: pipeline-flow-fwd 1.5s linear infinite;
-}
-
-.pipeline-flow-rev {
-  animation: pipeline-flow-rev 1.5s linear infinite;
-}
