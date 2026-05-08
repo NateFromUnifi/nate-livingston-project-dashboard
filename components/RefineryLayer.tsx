@@ -73,16 +73,19 @@ export default function RefineryLayer({ selectedId, onSelect }: Props) {
               stroke="transparent"
               scale={baseScale * 1.6}
             />
-            {/* Main marker */}
-            <Marker
-              type={m.type}
-              size={6}
-              fill={m.color}
-              stroke="white"
-              strokeWidth={1.5}
-              scale={baseScale}
-              transition
-            />
+            {/* Main marker (carries native tooltip via <title>) */}
+            <g>
+              <Marker
+                type={m.type}
+                size={6}
+                fill={m.color}
+                stroke="white"
+                strokeWidth={1.5}
+                scale={baseScale}
+                transition
+              />
+              <title>{m.name}</title>
+            </g>
           </g>
         );
       })}
