@@ -62,7 +62,17 @@ export default function PipelineCard({ selectedId, onClose }: Props) {
               <h2 className="mt-1.5 font-serif text-2xl text-neutral-900 dark:text-neutral-50">
                 {displayed.name}
               </h2>
-              <p className="mt-1 text-sm text-neutral-500">{displayed.operator}</p>
+              {displayed.operatorLogo && (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={displayed.operatorLogo}
+                  alt=""
+                  className={`mt-3 h-6 w-auto max-w-[180px] object-contain ${
+                    displayed.operatorLogoOnDark ? 'invert dark:invert-0' : ''
+                  }`}
+                />
+              )}
+              <p className="mt-1.5 text-sm text-neutral-500">{displayed.operator}</p>
             </div>
             <button
               type="button"

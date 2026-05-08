@@ -21,6 +21,8 @@ export type PipelineProperties = {
   lengthKm: number;
   capacity: string;
   inServiceYear: number;
+  operatorLogo?: string;
+  operatorLogoOnDark?: boolean;
   keyFacts: string[];
   notes?: string;
   color: string;
