@@ -6,6 +6,15 @@ const ACCENTS: Record<string, string> = {
   WCS: '#7c3aed',
 };
 
+const DESCRIPTIONS: Record<string, string> = {
+  WTI:
+    "Light, sweet crude — the North American benchmark. Quoted at the Cushing, Oklahoma pipeline hub and settled on NYMEX. The headline 'oil price' you see in most US financial coverage.",
+  Brent:
+    'Light, sweet crude from the North Sea — the pricing benchmark for roughly two-thirds of global oil supply. Settled on ICE in London; especially relevant for European, African, and Asian buyers.',
+  WCS:
+    'Heavy, sour blend of Alberta oil sands bitumen and diluent, quoted at Hardisty, AB. Trades at a wide discount to WTI — the WCS–WTI differential reflects pipeline-egress capacity, the cost of upgrading heavy oil, and competition for refining capacity that can handle it.',
+};
+
 const formatPrice = (n: number) =>
   n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
@@ -50,7 +59,32 @@ export default function PriceCards() {
           <PriceCard key={p.symbol} entry={p} />
         ))}
       </div>
+      <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
+        {items.map((p) => (
+          <BenchmarkBio key={`${p.symbol}-bio`} symbol={p.symbol} accent={ACCENTS[p.symbol]} />
+        ))}
+      </div>
     </section>
+  );
+}
+
+function BenchmarkBio({ symbol, accent }: { symbol: string; accent?: string }) {
+  return (
+    <div className="px-1">
+      <div className="mb-1.5 flex items-center gap-2">
+        <span
+          className="h-1.5 w-1.5 shrink-0 rounded-full"
+          style={{ backgroundColor: accent ?? '#525252' }}
+          aria-hidden
+        />
+        <p className="text-[10px] uppercase tracking-widest text-neutral-400">
+          What it tracks
+        </p>
+      </div>
+      <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+        {DESCRIPTIONS[symbol]}
+      </p>
+    </div>
   );
 }
 
