@@ -20,9 +20,13 @@ import {
   PRODUCTION_BASIN_SWATCH_COLORS,
 } from '@/lib/basins';
 import {
-  refineries,
-  REFINERY_LAYER_LABEL,
-  REFINERY_SWATCH_COLORS,
+  REFINERY_COUNT,
+  REFINERY_LABEL,
+  REFINERY_SWATCH,
+  UPGRADER_COUNT,
+  UPGRADER_LABEL,
+  UPGRADER_SWATCH,
+  type DownstreamCategory,
 } from '@/lib/refineries';
 
 type CategoryConfig = {
@@ -41,7 +45,7 @@ export default function OilGasMapView() {
   const [selection, setSelection] = useState<Selection>(null);
   const [activeCategory, setActiveCategory] = useState<PipelineCategory | null>('crude');
   const [basinsEnabled, setBasinsEnabled] = useState(true);
-  const [refineriesEnabled, setRefineriesEnabled] = useState(true);
+  const [activeDownstream, setActiveDownstream] = useState<DownstreamCategory | null>('refinery');
 
   const categories = useMemo<CategoryConfig[]>(
     () => [
@@ -62,9 +66,10 @@ export default function OilGasMapView() {
     if (basinsEnabled && selection?.kind === 'basin') setSelection(null);
   };
 
-  const toggleRefineries = () => {
-    setRefineriesEnabled((prev) => !prev);
-    if (refineriesEnabled && selection?.kind === 'refinery') setSelection(null);
+  const toggleDownstreamCategory = (key: DownstreamCategory) => {
+    const next = activeDownstream === key ? null : key;
+    setActiveDownstream(next);
+    if (selection?.kind === 'refinery') setSelection(null);
   };
 
   const selectedPipelineId = selection?.kind === 'pipeline' ? selection.id : null;
@@ -75,7 +80,7 @@ export default function OilGasMapView() {
     const parts: string[] = [];
     if (activeCategory) parts.push('pipeline');
     if (basinsEnabled) parts.push('basin');
-    if (refineriesEnabled) parts.push('facility');
+    if (activeDownstream) parts.push('facility');
     if (parts.length === 0) return 'Hover a region';
     if (parts.length === 1) return `Click a ${parts[0]} for details`;
     if (parts.length === 2) return `Click a ${parts[0]} or ${parts[1]} for details`;
@@ -114,13 +119,22 @@ export default function OilGasMapView() {
           <span className="ml-2 text-[10px] font-semibold uppercase tracking-widest text-neutral-400">
             Downstream
           </span>
-          <LayerToggle
-            enabled={refineriesEnabled}
-            onToggle={toggleRefineries}
-            label={REFINERY_LAYER_LABEL}
-            count={refineries.features.length}
-            swatchColors={REFINERY_SWATCH_COLORS}
-          />
+          <div role="radiogroup" aria-label="Downstream category" className="flex flex-wrap gap-2">
+            <LayerToggle
+              enabled={activeDownstream === 'upgrader'}
+              onToggle={() => toggleDownstreamCategory('upgrader')}
+              label={UPGRADER_LABEL}
+              count={UPGRADER_COUNT}
+              swatchColors={UPGRADER_SWATCH}
+            />
+            <LayerToggle
+              enabled={activeDownstream === 'refinery'}
+              onToggle={() => toggleDownstreamCategory('refinery')}
+              label={REFINERY_LABEL}
+              count={REFINERY_COUNT}
+              swatchColors={REFINERY_SWATCH}
+            />
+          </div>
         </div>
         <span className="text-xs uppercase tracking-wider text-neutral-400">{hint}</span>
       </div>
@@ -140,8 +154,9 @@ export default function OilGasMapView() {
               onSelect={(id) => setSelection({ kind: 'pipeline', id })}
             />
           )}
-          {refineriesEnabled && (
+          {activeDownstream && (
             <RefineryLayer
+              category={activeDownstream}
               selectedId={selectedRefineryId}
               onSelect={(id) => setSelection({ kind: 'refinery', id })}
             />

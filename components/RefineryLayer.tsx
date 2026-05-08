@@ -2,21 +2,31 @@
 
 import { useMemo, useState } from 'react';
 import { useCanadaProjection } from '@/components/CanadaMap';
-import { refineries, type RefineryType } from '@/lib/refineries';
+import {
+  refineries,
+  type DownstreamCategory,
+  type RefineryType,
+} from '@/lib/refineries';
 
 type Props = {
+  category: DownstreamCategory;
   selectedId: string | null;
   onSelect: (id: string) => void;
 };
 
 type Pt = [number, number];
 
-export default function RefineryLayer({ selectedId, onSelect }: Props) {
+export default function RefineryLayer({ category, selectedId, onSelect }: Props) {
   const { projection } = useCanadaProjection();
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const items = useMemo(() => {
-    return refineries.features.map((f) => {
+    // Integrated facilities (Shell Scotford) render alongside whichever
+    // category is active — they belong to both upgraders and refineries.
+    const visible = refineries.features.filter(
+      (f) => f.properties.type === category || f.properties.type === 'integrated',
+    );
+    return visible.map((f) => {
       const projected = (projection(f.geometry.coordinates as Pt) ?? [0, 0]) as Pt;
       return {
         id: f.properties.id,
@@ -27,7 +37,7 @@ export default function RefineryLayer({ selectedId, onSelect }: Props) {
         cy: projected[1],
       };
     });
-  }, [projection]);
+  }, [category, projection]);
 
   const hasSelection = selectedId !== null;
   const hovered = items.find((i) => i.id === hoveredId);

@@ -42,3 +42,24 @@ export const REFINERY_TYPE_LABELS: Record<RefineryType, string> = {
 
 // Type-level swatch colours used in the toggle pill.
 export const REFINERY_SWATCH_COLORS = ['#1e293b', '#d97706', '#059669'];
+
+// "Downstream" category — radio between upgraders and refineries. Integrated
+// facilities (Shell Scotford) render under both, so the marker map always has
+// the full integrated picture as long as one of the two toggles is on.
+export type DownstreamCategory = 'upgrader' | 'refinery';
+
+export const UPGRADER_LABEL = 'Upgraders';
+export const REFINERY_LABEL = 'Refineries';
+
+const UPGRADER_FEATURES = refineries.features.filter(
+  (f) => f.properties.type === 'upgrader',
+);
+const REFINERY_FEATURES = refineries.features.filter(
+  (f) => f.properties.type === 'refinery',
+);
+
+export const UPGRADER_COUNT = UPGRADER_FEATURES.length;
+export const REFINERY_COUNT = REFINERY_FEATURES.length;
+
+export const UPGRADER_SWATCH = ['#1e293b'];
+export const REFINERY_SWATCH = ['#d97706'];
