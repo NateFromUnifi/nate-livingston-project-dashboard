@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { useCanadaProjection } from '@/components/CanadaMap';
-import { basins } from '@/lib/basins';
+import { basins, type BasinResourceType } from '@/lib/basins';
 
 type Props = {
   selectedId: string | null;
@@ -11,10 +11,11 @@ type Props = {
 
 type Pt = [number, number];
 
-// Inflate the polygon outward this much before smoothing, so the
-// rounded blob encapsulates the polygon's interior area instead of
-// inset-ing into it (which midpoint smoothing alone would do).
-const INFLATE_FACTOR = 1.12;
+// Production basins inflate outward 12% so the smoothed shape encapsulates
+// the polygon area. The WCSB umbrella is already huge — no inflation, or
+// it would push past the map edges into the US.
+const INFLATE_PRODUCTION = 1.12;
+const INFLATE_UMBRELLA = 1.0;
 
 function centroid(points: Pt[]): Pt {
   const n = points.length;
@@ -40,8 +41,7 @@ function polygonArea(points: Pt[]): number {
 }
 
 // Closed quadratic-bezier smoothing: each polygon vertex becomes a
-// control point and the curve passes through every edge midpoint.
-// Result is a closed rounded blob with no sharp corners.
+// control point; the curve passes through every edge midpoint.
 function smoothClosedPath(points: Pt[]): string {
   const n = points.length;
   if (n < 3) return '';
@@ -65,7 +65,6 @@ export default function BasinLayer({ selectedId, onSelect }: Props) {
       const ring = (f.geometry.type === 'Polygon'
         ? f.geometry.coordinates[0]
         : f.geometry.coordinates[0][0]) as Pt[];
-      // Drop GeoJSON's duplicate closing point if present.
       const isDupClose =
         ring.length > 1 &&
         ring[0][0] === ring[ring.length - 1][0] &&
@@ -73,22 +72,33 @@ export default function BasinLayer({ selectedId, onSelect }: Props) {
       const open = isDupClose ? ring.slice(0, -1) : ring;
       const projected = open.map((c) => (projection(c) ?? [0, 0]) as Pt);
       const [cx, cy] = centroid(projected);
-      const inflated = scaleAround(projected, cx, cy, INFLATE_FACTOR);
+      const resourceType = f.properties.resourceType as BasinResourceType;
+      const isUmbrella = resourceType === 'sedimentary-basin';
+      const inflated = scaleAround(
+        projected,
+        cx,
+        cy,
+        isUmbrella ? INFLATE_UMBRELLA : INFLATE_PRODUCTION,
+      );
       const xs = inflated.map((p) => p[0]);
       const ys = inflated.map((p) => p[1]);
       return {
         id: f.properties.id,
         name: f.properties.name,
         color: f.properties.color,
+        isUmbrella,
         d: smoothClosedPath(inflated),
         labelX: (Math.min(...xs) + Math.max(...xs)) / 2,
         labelY: Math.min(...ys) - 12,
         area: polygonArea(inflated),
       };
     });
-    // Render largest first; smaller shapes sit on top so they remain
-    // clickable in any overlap zone.
-    return built.sort((a, b) => b.area - a.area);
+    // Umbrella always paints first (deepest), then production basins largest-first
+    // so smaller production blobs sit on top and stay clickable in overlap zones.
+    return built.sort((a, b) => {
+      if (a.isUmbrella !== b.isUmbrella) return a.isUmbrella ? -1 : 1;
+      return b.area - a.area;
+    });
   }, [projection]);
 
   const hasSelection = selectedId !== null;
@@ -101,25 +111,37 @@ export default function BasinLayer({ selectedId, onSelect }: Props) {
         const isHovered = b.id === hoveredId;
         const isDimmed = hasSelection && !isSelected;
 
-        const fillOpacity = isSelected
-          ? 0.45
-          : isHovered
-          ? isDimmed
-            ? 0.22
-            : 0.34
-          : isDimmed
-          ? 0.1
-          : 0.2;
-        const strokeWidth = isSelected ? 2.25 : isHovered ? 2 : 1;
-        const strokeOpacity = isSelected
-          ? 1
-          : isHovered
-          ? isDimmed
-            ? 0.75
-            : 1
-          : isDimmed
-          ? 0.3
-          : 0.75;
+        let fillOpacity: number;
+        let strokeWidth: number;
+        let strokeOpacity: number;
+        let strokeDasharray: string | undefined;
+
+        if (b.isUmbrella) {
+          fillOpacity = isSelected ? 0.18 : isHovered ? 0.12 : isDimmed ? 0.04 : 0.07;
+          strokeWidth = isSelected ? 1.75 : isHovered ? 1.5 : 1;
+          strokeOpacity = isSelected ? 1 : isHovered ? 0.9 : isDimmed ? 0.3 : 0.55;
+          strokeDasharray = '5 4';
+        } else {
+          fillOpacity = isSelected
+            ? 0.45
+            : isHovered
+            ? isDimmed
+              ? 0.22
+              : 0.34
+            : isDimmed
+            ? 0.1
+            : 0.2;
+          strokeWidth = isSelected ? 2.25 : isHovered ? 2 : 1;
+          strokeOpacity = isSelected
+            ? 1
+            : isHovered
+            ? isDimmed
+              ? 0.75
+              : 1
+            : isDimmed
+            ? 0.3
+            : 0.75;
+        }
 
         return (
           <path
@@ -130,6 +152,7 @@ export default function BasinLayer({ selectedId, onSelect }: Props) {
             stroke={b.color}
             strokeWidth={strokeWidth}
             strokeOpacity={strokeOpacity}
+            strokeDasharray={strokeDasharray}
             strokeLinejoin="round"
             className="cursor-pointer transition-all duration-150"
             onMouseEnter={() => setHoveredId(b.id)}

@@ -5,7 +5,8 @@ export type BasinResourceType =
   | 'oil-sands'
   | 'gas-shale'
   | 'liquids-rich-shale'
-  | 'tight-oil';
+  | 'tight-oil'
+  | 'sedimentary-basin';
 
 export type BasinProperties = {
   id: string;
@@ -40,4 +41,15 @@ export const RESOURCE_TYPE_LABELS: Record<BasinResourceType, string> = {
   'gas-shale': 'Gas shale',
   'liquids-rich-shale': 'Liquids-rich shale',
   'tight-oil': 'Tight oil',
+  'sedimentary-basin': 'Sedimentary basin',
 };
+
+// Counts and swatches reflect the user-facing "Production Basins" toggle —
+// the WCSB umbrella renders alongside but is conceptually a backdrop, not a peer.
+export const PRODUCTION_BASINS = basins.features.filter(
+  (f) => f.properties.resourceType !== 'sedimentary-basin',
+);
+export const PRODUCTION_BASIN_COUNT = PRODUCTION_BASINS.length;
+export const PRODUCTION_BASIN_SWATCH_COLORS = PRODUCTION_BASINS.map(
+  (f) => f.properties.color,
+);

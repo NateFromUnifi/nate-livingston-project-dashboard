@@ -12,7 +12,11 @@ import {
   PIPELINE_CATEGORY_LABELS,
   type PipelineCategory,
 } from '@/lib/pipelines';
-import { basins, BASIN_LAYER_LABEL } from '@/lib/basins';
+import {
+  BASIN_LAYER_LABEL,
+  PRODUCTION_BASIN_COUNT,
+  PRODUCTION_BASIN_SWATCH_COLORS,
+} from '@/lib/basins';
 
 type CategoryConfig = {
   key: PipelineCategory;
@@ -24,8 +28,6 @@ type Selection =
   | { kind: 'pipeline'; id: string }
   | { kind: 'basin'; id: string }
   | null;
-
-const basinSwatchColors = basins.features.map((f) => f.properties.color);
 
 export default function OilGasMapView() {
   const [selection, setSelection] = useState<Selection>(null);
@@ -87,8 +89,8 @@ export default function OilGasMapView() {
             enabled={basinsEnabled}
             onToggle={toggleBasins}
             label={BASIN_LAYER_LABEL}
-            count={basins.features.length}
-            swatchColors={basinSwatchColors}
+            count={PRODUCTION_BASIN_COUNT}
+            swatchColors={PRODUCTION_BASIN_SWATCH_COLORS}
           />
         </div>
         <span className="text-xs uppercase tracking-wider text-neutral-400">{hint}</span>

@@ -167,6 +167,45 @@
           [-117.0, 53.8]
         ]]
       }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "wcsb",
+        "name": "Western Canadian Sedimentary Basin",
+        "resourceType": "sedimentary-basin",
+        "primaryResource": "Geological umbrella for Canadian oil sands, gas, and NGL plays",
+        "province": "BC / AB / SK / MB / NT",
+        "productionContext": "WCSB-wide ~5+ million boe/d combined. The five named basins on this map are sub-regions within it.",
+        "reserves": "~165 billion bbl bitumen reserves + 500+ Tcf gas resource — Canada's energy heartland",
+        "majorOperators": ["See individual basins for the operator-level breakdown"],
+        "geology": "Foreland basin formed when the Rocky Mountains thrust upward and the adjacent crust flexed downward, creating an asymmetric trough deepest along the western edge. Sediments stratify from Cambrian–Devonian carbonates at depth to Cretaceous shales and sandstones near surface — every formation is a potential producer.",
+        "keyFacts": [
+          "Spans most of Alberta and Saskatchewan, with extensions into NE British Columbia, southwestern Manitoba, and the southern Northwest Territories.",
+          "Hosts ~95% of Canada's onshore oil and natural gas production.",
+          "All five named basins on this map (Athabasca, Cold Lake, Peace River, Montney, Duvernay) are specific producing zones inside the WCSB.",
+          "Cretaceous shales (Montney, Duvernay) source most of the gas + liquids; Cretaceous sandstones (McMurray Formation, etc.) host the oil sands; the Devonian carbonates beneath were the original conventional oil targets.",
+          "Most analyst conversations about Canadian oil & gas reference 'WCSB' as shorthand for the Western Canadian production base."
+        ],
+        "notes": "Hand-traced approximation. The actual basin runs from the Rocky Mountain Foreland (west) to the Canadian Shield edge (east), and from the US border (south) to roughly 60°N (north). Renders as a dashed backdrop behind the production basins to communicate its 'canvas' role.",
+        "color": "#65a30d"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [[
+          [-114.0, 49.0],
+          [-115.0, 49.5],
+          [-118.0, 52.0],
+          [-124.0, 55.5],
+          [-127.0, 60.0],
+          [-118.0, 62.0],
+          [-108.0, 61.0],
+          [-102.0, 56.0],
+          [-99.5, 52.0],
+          [-99.0, 49.0],
+          [-114.0, 49.0]
+        ]]
+      }
     }
   ]
 }
