@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import OilGasMapView from '@/components/OilGasMapView';
 import PriceCards from '@/components/PriceCards';
+import IndustrySegments from '@/components/IndustrySegments';
 
 export const metadata = {
   title: 'Canadian Oil & Gas Primer — Nate Livingston',
@@ -39,6 +40,7 @@ export default function OilGasPage() {
       </section>
 
       <PriceCards />
+      <IndustrySegments />
     </div>
   );
 }
