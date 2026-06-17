@@ -22,13 +22,6 @@ const projects: Project[] = [
     blurb:
       'Discounted cash flow valuation of TOU.TO with a full equity research pitch deck and recommendation.',
   },
-  {
-    href: '#',
-    title: 'Equity Research Index',
-    status: 'Planned',
-    blurb:
-      'Long-form research notes on Canadian energy equities — operators, midstream, services.',
-  },
 ];
 
 export default function Home() {
