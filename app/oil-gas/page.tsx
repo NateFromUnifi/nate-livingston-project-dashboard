@@ -6,7 +6,7 @@ import IndustrySegments from '@/components/IndustrySegments';
 export const metadata = {
   title: 'Canadian Oil & Gas Primer — Nate Livingston',
   description:
-    'A visual explainer of the Canadian energy landscape: pipelines, production basins, and proposed projects.',
+    'A visual explainer of the Canadian energy landscape for beginners: production basins, transport infrastructure, refining, and live benchmark prices.',
 };
 
 export default function OilGasPage() {
@@ -27,8 +27,9 @@ export default function OilGasPage() {
           The Canadian Oil &amp; Gas Industry
         </h1>
         <p className="max-w-3xl text-lg leading-relaxed text-neutral-600 dark:text-neutral-300">
-          A visual explainer for beginners. The pipelines, production basins, and proposed projects
-          that move Canadian crude and natural gas to market.
+          A visual explainer for beginners — see the whole Canadian energy landscape at a glance:
+          where crude and natural gas come out of the ground, how they move and get refined, and what
+          the barrels are worth today with live benchmark prices.
         </p>
       </header>
 

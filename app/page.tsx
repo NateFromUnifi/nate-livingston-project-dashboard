@@ -13,7 +13,7 @@ const projects: Project[] = [
     title: 'Canadian Oil & Gas Primer',
     status: 'In progress',
     blurb:
-      'Visual explainer of the Canadian energy landscape — pipelines, production basins, and proposed projects, mapped at a glance.',
+      'A visual map of the Canadian energy landscape built for beginners — production basins, transport, refining, and live benchmark prices, all in one view.',
   },
   {
     href: '#',
