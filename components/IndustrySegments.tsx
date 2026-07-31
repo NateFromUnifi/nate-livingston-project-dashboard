@@ -39,8 +39,8 @@ const SEGMENTS: Segment[] = [
       { name: 'Whitecap Resources' },
     ],
     facts: [
-      'Canada produces ~4.9 MMbbl/d of crude oil (CER, 2024)',
-      'Oil sands account for ~64% of total Canadian crude output (CAPP)',
+      'Canada produced a record ~5.0 MMbbl/d of crude oil in 2024 (CER)',
+      'Oil sands account for roughly two-thirds of Canadian crude production (CAPP)',
     ],
   },
   {
@@ -80,7 +80,7 @@ const SEGMENTS: Segment[] = [
     tagline: 'Refining & marketing',
     accent: '#475569',
     definition:
-      'Where barrels become products people actually buy — gasoline, diesel, jet fuel, asphalt, and petrochemical feedstocks. Downstream margins (the "crack spread") depend on the gap between crude input cost and refined product prices, plus how well a refinery is configured for the crude it runs. Canada has 17 operating refineries with roughly 2.0 MMbbl/d of total capacity.',
+      'Where barrels become products people actually buy — gasoline, diesel, jet fuel, asphalt, and petrochemical feedstocks. Downstream margins (the "crack spread") depend on the gap between crude input cost and refined product prices, plus how well a refinery is configured for the crude it runs. Canada has 16 operating refineries with roughly 1.9 MMbbl/d of total capacity.',
     activities: [
       'Crude refining (distillation, cracking, hydrotreating)',
       'Petrochemical and lubricants manufacturing',
@@ -99,7 +99,7 @@ const SEGMENTS: Segment[] = [
       { name: 'North Atlantic Refining (Braya)' },
     ],
     facts: [
-      'Canadian refining capacity ~2.0 MMbbl/d across 17 refineries (CER)',
+      'Canadian refining capacity ~1.9 MMbbl/d across 16 refineries (CER / NRCan)',
       "Irving's Saint John refinery is the largest at ~320 Mbbl/d (Irving Oil)",
     ],
   },

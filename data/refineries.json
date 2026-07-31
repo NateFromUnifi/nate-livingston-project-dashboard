@@ -243,14 +243,14 @@
         "operator": "Parkland Corporation",
         "operatorLogo": "/logos/parkland.png",
         "status": "Operational",
-        "capacity": "~55,000 bbl/d (only BC refinery)",
+        "capacity": "~55,000 bbl/d (largest BC refinery)",
         "inputs": "Light crude (TMX-fed) + Alaskan crude",
         "outputs": "Gasoline, diesel, jet fuel for the BC market",
         "process": "Atmospheric distillation + hydrotreating + reforming. Smaller and simpler than other Canadian refineries — meets local BC fuel demand. Light crude only (no coking or heavy oil capability).",
         "location": { "city": "Burnaby", "province": "BC" },
         "inServiceYear": 1935,
         "keyFacts": [
-          "The only operating refinery in British Columbia.",
+          "BC's largest refinery, and the only one serving the Metro Vancouver / Lower Mainland market. (Tidewater's smaller Prince George refinery, ~12,000 bbl/d, serves the BC interior.)",
           "Owned by Parkland Corporation — Canadian fuel retailer (operates Chevron-, On the Run-, and other-branded stations).",
           "Crude feed via Trans Mountain Pipeline (light crude only — no heavy oil capability).",
           "Smaller and simpler than other Canadian refineries — meets BC's local fuel demand.",
@@ -259,6 +259,82 @@
         "color": "#d97706"
       },
       "geometry": { "type": "Point", "coordinates": [-122.92, 49.29] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "valero-jean-gaulin",
+        "name": "Valero Jean-Gaulin Refinery",
+        "type": "refinery",
+        "operator": "Valero Energy",
+        "status": "Operational",
+        "capacity": "~265,000 bbl/d (2nd largest in Canada)",
+        "inputs": "Imported and North American crude (waterborne + pipeline via the Saint-Laurent / Enbridge Line 9B)",
+        "outputs": "Gasoline, diesel, jet fuel, heating oil, petrochemical feedstocks",
+        "process": "Full-complex refining — atmospheric and vacuum distillation, fluid catalytic cracking, hydrocracking, and reforming. Deep-water St. Lawrence location allows crude imports by tanker and product export across Eastern Canada and the US Northeast.",
+        "location": { "city": "Lévis", "province": "QC" },
+        "inServiceYear": 1971,
+        "keyFacts": [
+          "The second-largest refinery in Canada (~265,000 bbl/d) — and Quebec's largest.",
+          "Owned by Valero Energy, the largest independent refiner in North America.",
+          "Deep-water terminal on the St. Lawrence takes waterborne crude; the reversed Enbridge Line 9B also delivers Western Canadian and US crude.",
+          "Supplies Ultramar-branded stations across Quebec and Atlantic Canada.",
+          "A cornerstone of Eastern Canadian fuel supply — the map's Ontario/Quebec refining picture is incomplete without it."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-71.23, 46.73] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "suncor-montreal",
+        "name": "Suncor Montreal Refinery",
+        "type": "refinery",
+        "operator": "Suncor Energy",
+        "operatorLogo": "/logos/suncor.png",
+        "status": "Operational",
+        "capacity": "~137,000 bbl/d",
+        "inputs": "Western Canadian and US crude via Enbridge Line 9B (reversed 2015) + waterborne crude",
+        "outputs": "Gasoline, diesel, jet fuel, asphalt, petrochemical feedstocks",
+        "process": "Atmospheric and vacuum distillation, fluid catalytic cracking, and hydrotreating. Located in Montreal-Est, integrated with an adjacent petrochemical and lubricants complex.",
+        "location": { "city": "Montreal-Est", "province": "QC" },
+        "inServiceYear": 1953,
+        "keyFacts": [
+          "Quebec's second major refinery, in Montreal's east-end industrial cluster.",
+          "The 2015 reversal of Enbridge Line 9B lets it run Western Canadian crude instead of relying only on imports.",
+          "Supplies Petro-Canada-branded stations across Quebec (Suncor owns Petro-Canada).",
+          "Anchors one of Eastern Canada's largest refining and petrochemical hubs."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-73.51, 45.63] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "sturgeon-nwr",
+        "name": "Sturgeon Refinery",
+        "type": "refinery",
+        "operator": "North West Redwater Partnership (CNRL + North West Refining)",
+        "operatorLogo": "/logos/cnrl.png",
+        "status": "Operational",
+        "capacity": "~80,000 bbl/d",
+        "inputs": "Diluted bitumen from Alberta's oil sands",
+        "outputs": "Ultra-low-sulphur diesel, diluent, naphtha",
+        "process": "Bitumen-fed refining built around a gasifier and hydrocracker rather than a coker — designed from the ground up for heavy oil, with integrated carbon capture feeding the Alberta Carbon Trunk Line.",
+        "location": { "city": "Redwater", "province": "AB" },
+        "inServiceYear": 2020,
+        "keyFacts": [
+          "Canada's newest refinery — first bitumen processed in 2020, the first greenfield refinery built in the country in over 35 years.",
+          "Owned 50/50 by Canadian Natural Resources and North West Refining; operated by the North West Redwater Partnership.",
+          "Purpose-built for diluted bitumen — one of very few refineries in the world designed to run oil sands crude directly.",
+          "Captures up to ~1.2 Mt of CO2 per year, piped out on the Alberta Carbon Trunk Line for storage and enhanced oil recovery.",
+          "Processes bitumen on behalf of the Alberta government (APMC) and CNRL under long-term tolling agreements."
+        ],
+        "color": "#d97706"
+      },
+      "geometry": { "type": "Point", "coordinates": [-113.10, 53.92] }
     }
   ]
 }

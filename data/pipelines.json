@@ -60,7 +60,7 @@
         "inServiceYear": 1953,
         "keyFacts": [
           "The only Canadian pipeline carrying crude to a Pacific tidewater port — strategic Asian-market access.",
-          "TMX (Trans Mountain Expansion) entered service in June 2024, lifting capacity from ~300,000 to 890,000 bbl/day.",
+          "TMX (Trans Mountain Expansion) entered service on May 1, 2024, lifting capacity from ~300,000 to 890,000 bbl/day.",
           "Owned by the Government of Canada since 2018, after Kinder Morgan exited amid permitting risk.",
           "Crosses the Rockies via the Yellowhead corridor (Edmonton → Jasper → Kamloops → Hope → Burnaby).",
           "TMX commissioning has narrowed the WCS / WTI price differential as Canadian crude reaches new buyers."
@@ -144,7 +144,7 @@
         "capacity": "2,100 MMcf/d",
         "inServiceYear": 2024,
         "keyFacts": [
-          "Feeds LNG Canada at Kitimat — Canada's first major Pacific LNG export project, with first cargoes expected mid-2025.",
+          "Feeds LNG Canada at Kitimat — Canada's first major Pacific LNG export project, which shipped its first cargo in June 2025.",
           "Carries Montney basin gas (Canada's most prolific gas play) ~670 km west across the BC interior.",
           "Construction faced sustained Wet'suwet'en hereditary chief opposition over consent and unceded territory (2019–2024).",
           "Cost rose from ~$6.6B CAD (2018 estimate) to ~$14.5B CAD at completion in 2023.",
@@ -299,6 +299,45 @@
           [-121.00, 51.50],
           [-121.00, 50.00],
           [-122.27, 49.00]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "alliance",
+        "name": "Alliance Pipeline",
+        "category": "gas",
+        "operator": "Alliance Pipeline Ltd. (Pembina Pipeline)",
+        "status": "Operational",
+        "commodity": "Natural gas — liquids-rich (unprocessed, high-pressure)",
+        "from": { "name": "Gordondale area (NW Alberta / NE BC)", "province": "AB / BC" },
+        "to": { "name": "Chicago, IL (Aux Sable / Channahon)", "country": "US" },
+        "lengthKm": 3850,
+        "capacity": "~1,600 MMcf/d",
+        "inServiceYear": 2000,
+        "keyFacts": [
+          "Canada's only major liquids-rich gas export line — moves unprocessed, NGL-rich gas at high pressure straight from the WCSB to the Chicago hub.",
+          "~1.6–1.7 Bcf/d across ~3,850 km of integrated Canadian and US pipe; NGLs are stripped out at Aux Sable's Channahon plant near Chicago.",
+          "The first major pipeline to carry liquids-rich gas under high pressure (in service December 2000) — lets producers skip field processing and monetize NGLs at the US end.",
+          "Prized by Montney and Duvernay producers whose gas is rich in high-value condensate and NGLs.",
+          "Pembina Pipeline consolidated ownership after acquiring Enbridge's interests in Alliance and Aux Sable in 2024."
+        ],
+        "notes": "On the map: only the Canadian trunk (NW Alberta → southeast Saskatchewan border) is rendered. The system continues through North Dakota and on to the Chicago market.",
+        "color": "#1d4ed8"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [-119.60, 55.75],
+          [-117.80, 54.90],
+          [-115.50, 54.00],
+          [-113.49, 53.30],
+          [-111.00, 52.30],
+          [-108.50, 51.30],
+          [-106.00, 50.40],
+          [-103.50, 49.60],
+          [-101.90, 49.00]
         ]
       }
     }
