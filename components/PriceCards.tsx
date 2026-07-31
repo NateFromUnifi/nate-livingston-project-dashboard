@@ -1,6 +1,13 @@
-import { prices, type PriceEntry } from '@/lib/prices';
+'use client';
 
-const ACCENTS: Record<string, string> = {
+import { useState } from 'react';
+import { prices, type PriceEntry } from '@/lib/prices';
+import { firstCollectionDate } from '@/lib/price-history';
+import PriceChart from './PriceChart';
+
+type Symbol = 'WTI' | 'Brent' | 'WCS';
+
+const ACCENTS: Record<Symbol, string> = {
   WTI: '#d97706',
   Brent: '#be123c',
   WCS: '#7c3aed',
@@ -41,8 +48,25 @@ const formatTimestamp = (iso: string) => {
   });
 };
 
+const formatCaptionDate = (iso: string | null) => {
+  if (!iso) return 'today';
+  const [y, m, d] = iso.split('-').map(Number);
+  const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][m - 1];
+  return `${month} ${d}, ${y}`;
+};
+
 export default function PriceCards() {
   const items: PriceEntry[] = [prices.wti, prices.brent, prices.wcs];
+  const [expanded, setExpanded] = useState<Set<Symbol>>(new Set());
+
+  const toggle = (sym: Symbol) => {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(sym)) next.delete(sym);
+      else next.add(sym);
+      return next;
+    });
+  };
 
   return (
     <section className="mt-12">
@@ -54,42 +78,43 @@ export default function PriceCards() {
           Source: {prices.source} · {formatTimestamp(prices.fetchedAt)}
         </p>
       </div>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+      <p className="mb-4 text-sm text-neutral-500 dark:text-neutral-400">
+        Select a benchmark to read what it tracks. All three are plotted on the price history chart below.
+      </p>
+      <div className="grid grid-cols-1 items-start gap-4 sm:grid-cols-3">
         {items.map((p) => (
-          <PriceCard key={p.symbol} entry={p} />
+          <PriceCard
+            key={p.symbol}
+            entry={p}
+            description={DESCRIPTIONS[p.symbol]}
+            isExpanded={expanded.has(p.symbol as Symbol)}
+            onToggle={() => toggle(p.symbol as Symbol)}
+          />
         ))}
       </div>
-      <div className="mt-5 grid grid-cols-1 gap-4 sm:grid-cols-3">
-        {items.map((p) => (
-          <BenchmarkBio key={`${p.symbol}-bio`} symbol={p.symbol} accent={ACCENTS[p.symbol]} />
-        ))}
-      </div>
+
+      <PriceChart />
+      {firstCollectionDate && (
+        <p className="mt-3 text-xs italic text-neutral-500 dark:text-neutral-400">
+          Price history since {formatCaptionDate(firstCollectionDate)}, updated daily.
+        </p>
+      )}
     </section>
   );
 }
 
-function BenchmarkBio({ symbol, accent }: { symbol: string; accent?: string }) {
-  return (
-    <div className="px-1">
-      <div className="mb-1.5 flex items-center gap-2">
-        <span
-          className="h-1.5 w-1.5 shrink-0 rounded-full"
-          style={{ backgroundColor: accent ?? '#525252' }}
-          aria-hidden
-        />
-        <p className="text-[10px] uppercase tracking-widest text-neutral-400">
-          What it tracks
-        </p>
-      </div>
-      <p className="text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
-        {DESCRIPTIONS[symbol]}
-      </p>
-    </div>
-  );
-}
-
-function PriceCard({ entry }: { entry: PriceEntry }) {
-  const accent = ACCENTS[entry.symbol] ?? '#525252';
+function PriceCard({
+  entry,
+  description,
+  isExpanded,
+  onToggle,
+}: {
+  entry: PriceEntry;
+  description: string;
+  isExpanded: boolean;
+  onToggle: () => void;
+}) {
+  const accent = ACCENTS[entry.symbol as Symbol] ?? '#525252';
   const positive = entry.changeUsd > 0;
   const negative = entry.changeUsd < 0;
   const flat = !positive && !negative;
@@ -100,8 +125,25 @@ function PriceCard({ entry }: { entry: PriceEntry }) {
     : 'text-rose-600 dark:text-rose-400';
   const arrow = flat ? '·' : positive ? '▲' : '▼';
 
+  const baseClasses =
+    'block w-full rounded-lg border bg-white p-5 shadow-sm text-left transition-all cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-white dark:focus-visible:ring-offset-neutral-950';
+  const stateClasses = isExpanded
+    ? 'border-transparent ring-2 dark:bg-neutral-900'
+    : 'border-neutral-200 hover:border-neutral-300 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:border-neutral-700';
+
   return (
-    <div className="rounded-lg border border-neutral-200 bg-white p-5 shadow-sm dark:border-neutral-800 dark:bg-neutral-950">
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-expanded={isExpanded}
+      aria-label={`${isExpanded ? 'Hide' : 'Show'} what ${entry.symbol} tracks`}
+      className={`${baseClasses} ${stateClasses}`}
+      style={
+        isExpanded
+          ? ({ ['--tw-ring-color' as string]: accent } as React.CSSProperties)
+          : undefined
+      }
+    >
       <div className="flex items-center gap-2">
         <span
           className="h-2 w-2 shrink-0 rounded-full"
@@ -126,6 +168,31 @@ function PriceCard({ entry }: { entry: PriceEntry }) {
           <span className="tabular-nums">{formatChange(entry.differentialToWti)}</span>
         </p>
       )}
-    </div>
+
+      <div className="mt-3 flex items-center gap-1.5 border-t border-neutral-100 pt-3 dark:border-neutral-800/80">
+        <svg
+          viewBox="0 0 16 16"
+          className={`h-3.5 w-3.5 text-neutral-400 transition-transform duration-200 ${
+            isExpanded ? 'rotate-180' : ''
+          }`}
+          aria-hidden
+        >
+          <path
+            d="M4 6l4 4 4-4"
+            stroke="currentColor"
+            strokeWidth={1.75}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            fill="none"
+          />
+        </svg>
+        <span className="text-xs uppercase tracking-wider text-neutral-500">What it tracks</span>
+      </div>
+      {isExpanded && (
+        <p className="mt-2 text-sm leading-relaxed text-neutral-600 dark:text-neutral-400">
+          {description}
+        </p>
+      )}
+    </button>
   );
 }

@@ -9,6 +9,7 @@
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 
 const OUT = 'data/prices.json';
+const HISTORY = 'data/price-history.json';
 const URL = 'https://oilprice.com/oil-price-charts';
 const UA =
   'Mozilla/5.0 (compatible; NateLivingstonPortfolio/1.0; +https://nate-livingston-project-dashboard.vercel.app)';
@@ -126,6 +127,30 @@ async function main() {
   console.log('  WTI  ', wti.priceUsd, ' (', wti.changeUsd >= 0 ? '+' : '', wti.changeUsd, ')');
   console.log('  Brent', brent.priceUsd, ' (', brent.changeUsd >= 0 ? '+' : '', brent.changeUsd, ')');
   console.log('  WCS  ', wcs.priceUsd, ' (diff to WTI:', wcs.differentialToWti, ')');
+
+  // Maintain price-history.json — upsert today's row idempotently so manual
+  // re-runs the same day overwrite rather than duplicate.
+  const today = new Date().toISOString().slice(0, 10);
+  let history = [];
+  if (existsSync(HISTORY)) {
+    try {
+      history = JSON.parse(readFileSync(HISTORY, 'utf8'));
+    } catch {
+      console.warn('history file unreadable — starting fresh');
+    }
+  }
+  const row = {
+    date: today,
+    wti: wti.priceUsd,
+    brent: brent.priceUsd,
+    wcs: wcs.priceUsd,
+  };
+  const existingIdx = history.findIndex((r) => r.date === today);
+  if (existingIdx >= 0) history[existingIdx] = row;
+  else history.push(row);
+  history.sort((a, b) => a.date.localeCompare(b.date));
+  writeFileSync(HISTORY, JSON.stringify(history, null, 2) + '\n');
+  console.log('upserted', HISTORY, '(', history.length, 'rows )');
 }
 
 main().catch((e) => {
