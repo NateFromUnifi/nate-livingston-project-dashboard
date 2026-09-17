@@ -1,32 +1,32 @@
 {
-  "fetchedAt": "2026-09-16T17:39:21.137Z",
+  "fetchedAt": "2026-09-17T17:40:06.365Z",
   "source": "oilprice.com",
   "wti": {
     "symbol": "WTI",
     "name": "West Texas Intermediate",
-    "priceUsd": 102.61,
-    "priceUsdPrev": 106.58,
-    "changeUsd": -3.97,
-    "changePct": -3.72,
+    "priceUsd": 102.24,
+    "priceUsdPrev": 102.61,
+    "changeUsd": -0.37,
+    "changePct": -0.36,
     "currency": "USD"
   },
   "brent": {
     "symbol": "Brent",
     "name": "Brent Crude",
-    "priceUsd": 105.94,
-    "priceUsdPrev": 109.26,
-    "changeUsd": -3.32,
-    "changePct": -3.04,
+    "priceUsd": 104.7,
+    "priceUsdPrev": 105.94,
+    "changeUsd": -1.24,
+    "changePct": -1.17,
     "currency": "USD"
   },
   "wcs": {
     "symbol": "WCS",
     "name": "Western Canadian Select",
-    "priceUsd": 93.48,
-    "priceUsdPrev": 89.04,
-    "changeUsd": 4.44,
-    "changePct": 4.99,
+    "priceUsd": 90.08,
+    "priceUsdPrev": 93.48,
+    "changeUsd": -3.4,
+    "changePct": -3.64,
     "currency": "USD",
-    "differentialToWti": -9.13
+    "differentialToWti": -12.16
   }
 }
